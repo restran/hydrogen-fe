@@ -1,4 +1,4 @@
-# hydrogen-ui
+# hydrogen-fe
 
 > A Vue.js project
 
