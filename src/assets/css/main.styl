@@ -1,0 +1,83 @@
+/**
+ * created by Neil on 2017/10/13.
+ */
+*
+  margin 0
+  padding 0
+
+body
+  overflow auto
+  font-weight 400
+  -webkit-font-smoothing antialiased
+
+input, textarea, code, body
+  font-family Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif
+
+.container
+  padding 15px
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-button, ::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+//-webkit-border-radius: 5px;
+//border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 28px;
+//-webkit-border-radius: 5px;
+//border-radius: 5px;
+//-webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+  background-clip: padding-box;
+  background-color: #c2c2c2;
+}
+
+::-webkit-scrollbar-button, ::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar-button:vertical:end:decrement, ::-webkit-scrollbar-button:vertical:start:increment, ::-webkit-scrollbar-track {
+  display: none;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.button-area
+  .el-form-item__content
+    line-height 28px !important
+
+.text-area
+  .el-form-item:after, .el-form-item:before, .el-form-item__content:after, .el-form-item__content:before
+    display none !important
+  .el-form-item:after
+    clear inherit !important
