@@ -1,33 +1,42 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Converter from '@/pages/Converter'
-import DigitConverter from '@/pages/DigitConverter'
+import Converter from '@/pages/converter/CommonConverter'
+import DigitConverter from '@/pages/converter/DigitConverter'
+import WhatEncode from '@/pages/converter/WhatEncode'
+
 import MorseCode from '@/pages/crypto/MorseCode'
 import CommonCrypto from '@/pages/crypto/CommonCrypto'
-import Hashed from '@/pages/Hashed'
+import Hashed from '@/pages/misc/Hashed'
+import Develop from '@/pages/misc/Develop'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/converter', component: Converter
+      path: '/converter/common', component: Converter
     },
     {
-      path: '/digit-converter', component: DigitConverter
+      path: '/converter/digit', component: DigitConverter
     },
     {
-      path: '/hashed', component: Hashed
+      path: '/converter/what-encode', component: WhatEncode
     },
     {
-      path: '/crypto-morse-code', component: MorseCode
+      path: '/misc/hashed', component: Hashed
     },
     {
-      path: '/crypto-common', component: CommonCrypto
+      path: '/misc/develop', component: Develop
     },
     {
-      path: '*', redirect: '/converter'
+      path: '/crypto/morse', component: MorseCode
+    },
+    {
+      path: '/crypto/common', component: CommonCrypto
+    },
+    {
+      path: '*', redirect: '/converter/common'
     }
   ]
 })

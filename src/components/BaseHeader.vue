@@ -1,14 +1,15 @@
 <template>
   <div class="header">
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="1">编码转换</el-menu-item>
-      <el-menu-item index="2">进制转换</el-menu-item>
-      <el-submenu index="3">
-        <template slot="title">密码学</template>
-        <el-menu-item index="3-1">常见密码</el-menu-item>
-        <el-menu-item index="3-2">摩斯密码</el-menu-item>
+    <el-menu :default-active="activeIndex" class="el-menu-header"
+             mode="horizontal" @select="handleSelect">
+      <el-submenu :index="item.name" v-for="item in menuList"
+                  :key="item.name">
+        <template slot="title">{{item.name}}</template>
+        <el-menu-item :index="item.name + '-' + x.name"
+                      v-for="x in item.children"
+                      :key="x.name">{{x.name}}
+        </el-menu-item>
       </el-submenu>
-      <el-menu-item index="4">哈希工具</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -56,26 +57,68 @@
     components: {},
     data () {
       return {
-        activeIndex: 'converter'
+        menuList: [
+          {
+            name: '编码转换',
+            basePath: '/converter/',
+            children: [
+              {
+                name: '常见编码',
+                path: 'common'
+              },
+              {
+                name: '进制转换',
+                path: 'digit'
+              },
+              {
+                name: 'WhatEncode',
+                path: 'what-encode'
+              }
+            ]
+          },
+          {
+            name: '密码学',
+            basePath: '/crypto/',
+            children: [
+              {
+                name: '常见密码',
+                path: 'common'
+              },
+              {
+                name: '摩斯密码',
+                path: 'morse'
+              }
+            ]
+          },
+          {
+            name: '杂项',
+            basePath: '/misc/',
+            children: [
+              {
+                name: '开发工具',
+                path: 'develop'
+              },
+              {
+                name: '哈希工具',
+                path: 'hashed'
+              }
+            ]
+          }
+        ],
+        activeIndex: '编码转换-常见编码'
       }
     },
     mounted () {
       let self = this
       this.$nextTick(function () {
         let path = self.$route.path
-        if (path === '/converter') {
-          this.activeIndex = '1'
-        } else if (path === '/digit-converter') {
-          this.activeIndex = '2'
-        } else if (path === '/crypto-common') {
-          this.activeIndex = '3-1'
-        }
-        else if (path === '/crypto-morse-code') {
-          this.activeIndex = '3-2'
-        }
-        else if (path === '/hashed') {
-          this.activeIndex = '4'
-        }
+        this.menuList.forEach(function (item, index) {
+          item.children.forEach(function (subItem, i) {
+            if (item.basePath + subItem.path === path) {
+              self.activeIndex = item.name + '-' + subItem.name
+            }
+          })
+        })
       })
     },
     created () {
@@ -84,17 +127,15 @@
     computed: {},
     methods: {
       handleSelect (key, keyPath) {
-        if (key === '1') {
-          this.$router.push({ path: '/converter' })
-        } else if (key === '2') {
-          this.$router.push({ path: '/digit-converter' })
-        } else if (key === '3-1') {
-          this.$router.push({ path: '/crypto-common' })
-        } else if (key === '3-2') {
-          this.$router.push({ path: '/crypto-morse-code' })
-        } else if (key === '4') {
-          this.$router.push({ path: '/hashed' })
-        }
+        console.log(key)
+        let self = this
+        this.menuList.forEach(function (item, index) {
+          item.children.forEach(function (subItem, i) {
+            if (item.name + '-' + subItem.name === key) {
+              self.$router.push({ path: item.basePath + subItem.path })
+            }
+          })
+        })
       }
     },
     watch: {}

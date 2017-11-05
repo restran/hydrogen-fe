@@ -1,0 +1,109 @@
+<template>
+  <div>
+    <el-card class="box-card row-bg" style="max-width: 800px; margin: 0 auto">
+      <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
+        <el-form ref="form" :model="form" :label-position="'top'"
+                 label-width="80px" style="width: 100%; padding: 0 10px">
+          <el-form-item label="最大深度">
+            <el-input-number v-model="form.maxDepth" :min="1" :max="20"></el-input-number>
+            <el-button type="primary" style="margin-left: 10px" @click="onSubmit">测试</el-button>
+          </el-form-item>
+
+          <el-form-item label="输入内容">
+            <el-input type="textarea" :rows="4" v-model="form.input"></el-input>
+          </el-form-item>
+        </el-form>
+      </el-row>
+      <div class="text item" v-for="item in resultList">
+        <div style="margin-bottom: 5px">
+          <p style="color: #1c8de0">{{ item.methods }}</p>
+          <p>{{ item.data }}</p>
+        </div>
+      </div>
+    </el-card>
+  </div>
+</template>
+
+<script>
+  function magic (value) {
+    return value
+  }
+
+  export default {
+    components: {},
+    name: 'hashed',
+    data () {
+      return {
+        form: {
+          input: '',
+          maxDepth: 5
+        },
+        resultList: []
+      }
+    },
+    mounted () {
+      let self = this
+      this.$nextTick(function () {
+
+      })
+    },
+    created () {
+
+    },
+    computed: {
+      hashed () {
+        return []
+      }
+    },
+    methods: {
+      backendRequest () {
+        if (this.form.input === '') {
+          return
+        }
+        let self = this
+        let data = {
+          'max_depth': this.form.maxDepth,
+          'data': this.form.input
+        }
+
+        this.$http.backendConvert('/api/converter/what-encode/', data)
+          .then(function (r) {
+            r['data'].forEach(function (item, index) {
+              item['_index'] = index
+            })
+
+            self.resultList = r['data']
+          }).catch(function (r) {
+          self.$emit('show-error-message', r['msg'])
+        })
+      },
+      onSubmit () {
+        return this.backendRequest()
+      }
+    },
+    watch: {}
+  }
+</script>
+
+<style scoped lang="stylus" rel="stylesheet/stylus">.row-bg {
+  margin-bottom: 30px;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  padding: 5px 0;
+}
+
+.box-card {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.tag {
+  margin: 0 10px 5px 0;
+}
+
+</style>

@@ -9,12 +9,13 @@ import router from './router'
 import ElementUI from 'element-ui'
 import VueAnalytics from 'vue-analytics'
 import 'element-ui/lib/theme-default/index.css'
+import VueClipboard from "vue-clipboard2"
 
 axios.defaults.headers.common['X-CSRFToken'] = Utils.getCookie('csrftoken')
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8'
 
 Vue.use(ElementUI)
-
+Vue.use(VueClipboard)
 Vue.use(VueAnalytics, {
   id: 'UA-38277310-6'
 })

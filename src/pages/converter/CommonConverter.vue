@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <div class="button-area float-left">
-      <el-form ref="form" label-position="top" label-width="80px">
+      <el-form ref="form" label-position="top" label-width="100px">
         <el-form-item label="转换选项" style="margin-bottom: 10px">
           <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('hex2bin')">Hex2Bin</el-button>
@@ -42,6 +42,12 @@
             <el-button type="primary" size="mini" @click="url_all_encode">URL全编码</el-button>
             <el-button type="primary" size="mini" @click="url_decode">URL解码</el-button>
           </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="url_encode_gb2312">URL GBK编码</el-button>
+            <el-button type="primary" size="mini" @click="url_decode_gb2312">URL GBK解码</el-button>
+          </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="b64encode">Base64编码</el-button>
             <el-button type="primary" size="mini" @click="b64decode">Base64解码</el-button>
@@ -68,17 +74,30 @@
             <el-button type="primary" size="mini" @click="html16_encode">Html16编码</el-button>
             <el-button type="primary" size="mini" @click="html16_decode">Html16解码</el-button>
           </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="js8_encode">JS8编码</el-button>
             <el-button type="primary" size="mini" @click="js8_decode">JS8解码</el-button>
           </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="js16_encode">JS16编码</el-button>
             <el-button type="primary" size="mini" @click="js16_decode">JS16解码</el-button>
           </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="unicode_encode">Unicode编码</el-button>
             <el-button type="primary" size="mini" @click="unicode_decode">Unicode解码</el-button>
+          </el-button-group>
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="html_escape">Html转义</el-button>
+            <el-button type="primary" size="mini" @click="html_un_escape">Html反转义</el-button>
+          </el-button-group>
+
+          <el-button type="primary" size="mini" @click="json_format">JSON格式化</el-button>
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_uu')">UUEncode编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_uu')">UUEncode解码</el-button>
           </el-button-group>
         </el-form-item>
 
@@ -133,6 +152,7 @@
   import utf8 from 'crypto-js/enc-utf8'
   import latin1 from 'crypto-js/enc-latin1'
   import hex from 'crypto-js/enc-hex'
+  import urlencode from 'urlencode'
 
   function url_encode (a, b) {
     return ++b ?
@@ -246,6 +266,48 @@
         this.lastAction = this.b32decode
         this.output(base32.decode(this.text.input))
       },
+      html_escape () {
+        this.lastAction = this.html_escape
+        let str = this.text.input
+        let s = ''
+        if (str.length === 0) return ''
+        s = str.replace(/&/g, '&gt;')
+        s = s.replace(/</g, '&lt;')
+        s = s.replace(/>/g, '&gt;')
+        s = s.replace(/ /g, '&nbsp;')
+        s = s.replace(/'/g, '&#39;')
+        s = s.replace(/"/g, '&quot;')
+        s = s.replace(/\n/g, '<br>')
+
+        this.output(s)
+      },
+      html_un_escape () {
+        this.lastAction = this.html_un_escape
+        let str = this.text.input
+        let s = ''
+        if (str.length === 0) return ''
+        s = str.replace(/&gt;/g, '&')
+        s = s.replace(/&lt;/g, '<')
+        s = s.replace(/&gt;/g, '>')
+        s = s.replace(/&nbsp;/g, ' ')
+        s = s.replace(/&#39;/g, '\'')
+        s = s.replace(/&quot;/g, '"')
+        s = s.replace(/<br>/g, '\n')
+
+        this.output(s)
+      },
+      json_format () {
+        this.lastAction = this.json_format
+        let text = ''
+        try {
+          text = JSON.parse(this.text.input)
+          text = JSON.stringify(text, null, 2)
+        } catch (e) {
+          text = '处理JSON出现异常: ' + e
+        }
+
+        this.output(text)
+      },
       utf7_encode () {
         this.lastAction = this.utf7_encode
         this.output(utf7.encode(this.text.input))
@@ -285,6 +347,14 @@
       url_decode () {
         this.lastAction = this.url_decode
         this.output(decodeURIComponent(this.text.input))
+      },
+      url_encode_gb2312 () {
+        this.lastAction = this.url_encode_gb2312
+        this.output(urlencode.encode(this.text.input, 'gbk'))
+      },
+      url_decode_gb2312 () {
+        this.lastAction = this.url_decode_gb2312
+        this.output(urlencode.decode(this.text.input, 'gbk'))
       },
       url_all_encode () {
         this.lastAction = this.url_all_encode

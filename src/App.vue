@@ -11,7 +11,7 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .main-content
-    margin 60px 15px 0
+    margin 60px 15px 30px
 </style>
 
 <script>
