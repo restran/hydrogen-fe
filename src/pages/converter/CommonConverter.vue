@@ -32,69 +32,71 @@
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="utf7_encode">UTF7编码</el-button>
-            <el-button type="primary" size="mini" @click="utf7_encode">UTF7全编码</el-button>
-            <el-button type="primary" size="mini" @click="utf7_decode">UTF7解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('utf7_encode')">UTF7编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('utf7_encode')">UTF7全编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('utf7_decode')">UTF7解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="url_encode">URL编码</el-button>
-            <el-button type="primary" size="mini" @click="url_all_encode">URL全编码</el-button>
-            <el-button type="primary" size="mini" @click="url_decode">URL解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('url_encode')">URL编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('url_all_encode')">URL全编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('url_decode')">URL解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="url_encode_gb2312">URL GBK编码</el-button>
-            <el-button type="primary" size="mini" @click="url_decode_gb2312">URL GBK解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('url_encode_gb2312')">URL GBK编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('url_decode_gb2312')">URL GBK解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="b64encode">Base64编码</el-button>
-            <el-button type="primary" size="mini" @click="b64decode">Base64解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b64encode')">Base64编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b64decode')">Base64解码</el-button>
           </el-button-group>
           <el-button-group>
-            <el-button type="primary" size="mini" @click="b32encode">Base32编码</el-button>
-            <el-button type="primary" size="mini" @click="b32decode">Base32解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b32encode')">Base32编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b32decode')">Base32解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="html10_encode">Html10编码</el-button>
-            <el-button type="primary" size="mini" @click="html10_decode">Html10解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html10_encode')">Html10编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html10_decode')">Html10解码</el-button>
           </el-button-group>
 
           <div>
-            <el-button type="primary" size="mini" @click="html_special_chars">Html Special Chars编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html_special_chars')">Html Special Chars编码
+            </el-button>
           </div>
 
           <div>
-            <el-button type="primary" size="mini" @click="string_char_code">String Char Code</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('string_char_code')">String Char Code
+            </el-button>
           </div>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="html16_encode">Html16编码</el-button>
-            <el-button type="primary" size="mini" @click="html16_decode">Html16解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html16_encode')">Html16编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html16_decode')">Html16解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="js8_encode">JS8编码</el-button>
-            <el-button type="primary" size="mini" @click="js8_decode">JS8解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('js8_encode')">JS8编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('js8_decode')">JS8解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="js16_encode">JS16编码</el-button>
-            <el-button type="primary" size="mini" @click="js16_decode">JS16解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('js16_encode')">JS16编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('js16_decode')">JS16解码</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="unicode_encode">Unicode编码</el-button>
-            <el-button type="primary" size="mini" @click="unicode_decode">Unicode解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('unicode_encode')">Unicode编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('unicode_decode')">Unicode解码</el-button>
           </el-button-group>
           <el-button-group>
-            <el-button type="primary" size="mini" @click="html_escape">Html转义</el-button>
-            <el-button type="primary" size="mini" @click="html_un_escape">Html反转义</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html_escape', false)">Html转义</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('html_un_escape', false)">Html反转义</el-button>
           </el-button-group>
 
-          <el-button type="primary" size="mini" @click="json_format">JSON格式化</el-button>
+          <el-button type="primary" size="mini" @click="frontend_convert('json_format', false)">JSON格式化</el-button>
           <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('to_uu')">UUEncode编码</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('from_uu')">UUEncode解码</el-button>
@@ -122,9 +124,16 @@
           </div>
 
           <div>
-            将输出作为输入
+            <div style="width: 115px;display: inline-block;">将输出作为输入</div>
             <el-switch
               v-model="outputAsInput"
+              on-color="#13ce66">
+            </el-switch>
+          </div>
+          <div>
+            <div style="width: 115px;display: inline-block;">换行分割多条输入</div>
+            <el-switch
+              v-model="multipleInput"
               on-color="#13ce66">
             </el-switch>
           </div>
@@ -183,7 +192,8 @@
         },
         digitalNum: 8,
         lastAction: undefined,
-        outputAsInput: false
+        outputAsInput: false,
+        multipleInput: true
       }
     },
     mounted () {
@@ -212,17 +222,6 @@
           this.lastAction()
         }
       },
-      hex2bin () {
-        let self = this
-        this.lastAction = this.hex2bin
-        this.$http.post('/api/convert-data')
-          .then(function (r) {
-            self.output(r['data'])
-          })
-          .catch(function (r) {
-            self.$emit('show-error-message', r['msg'])
-          })
-      },
       backend_convert (method) {
         let self = this
         this.lastAction = this.backend_convert
@@ -243,32 +242,27 @@
             self.$emit('show-error-message', r['msg'])
           })
       },
-      b64encode () {
-        this.lastAction = this.b64encode
-        this.output(base64.stringify(utf8.parse(this.text.input)))
+      b64encode (input) {
+        return base64.stringify(utf8.parse(input))
       },
-      b64decode () {
+      b64decode (input) {
         let result
-        this.lastAction = this.b64decode
-        let bytes = base64.parse(this.text.input)
+        let bytes = base64.parse(input)
         try {
           result = utf8.stringify(bytes)
         } catch (e) {
           result = latin1.stringify(bytes)
         }
-        this.output(result)
+        return result
       },
-      b32encode () {
-        this.lastAction = this.b32encode
-        this.output(base32.encode(this.text.input))
+      b32encode (input) {
+        return base32.encode(input)
       },
-      b32decode () {
-        this.lastAction = this.b32decode
-        this.output(base32.decode(this.text.input))
+      b32decode (input) {
+        return base32.decode(input)
       },
-      html_escape () {
-        this.lastAction = this.html_escape
-        let str = this.text.input
+      html_escape (input) {
+        let str = input
         let s = ''
         if (str.length === 0) return ''
         s = str.replace(/&/g, '&gt;')
@@ -278,12 +272,10 @@
         s = s.replace(/'/g, '&#39;')
         s = s.replace(/"/g, '&quot;')
         s = s.replace(/\n/g, '<br>')
-
-        this.output(s)
+        return s
       },
-      html_un_escape () {
-        this.lastAction = this.html_un_escape
-        let str = this.text.input
+      html_un_escape (input) {
+        let str = input
         let s = ''
         if (str.length === 0) return ''
         s = str.replace(/&gt;/g, '&')
@@ -293,42 +285,34 @@
         s = s.replace(/&#39;/g, '\'')
         s = s.replace(/&quot;/g, '"')
         s = s.replace(/<br>/g, '\n')
-
-        this.output(s)
+        return s
       },
-      json_format () {
-        this.lastAction = this.json_format
+      json_format (input) {
         let text = ''
         try {
-          text = JSON.parse(this.text.input)
+          text = JSON.parse(input)
           text = JSON.stringify(text, null, 2)
         } catch (e) {
           text = '处理JSON出现异常: ' + e
         }
 
-        this.output(text)
+        return text
       },
-      utf7_encode () {
-        this.lastAction = this.utf7_encode
-        this.output(utf7.encode(this.text.input))
+      utf7_encode (input) {
+        return utf7.encode(input)
       },
-      utf7_all_encode () {
-        this.lastAction = this.utf7_encode
-        this.output(utf7.encodeAllChar(this.text.input))
+      utf7_all_encode (input) {
+        return utf7.encodeAllChar(input)
       },
-      utf7_decode () {
-        this.lastAction = this.utf7_decode
-        this.output(utf7.decode(this.text.input))
+      utf7_decode (input) {
+        return utf7.decode(input)
       },
-      hex_encode () {
-        this.lastAction = this.hex_encode
-        let result = hex.stringify(utf8.parse(this.text.input))
-        this.output(result)
+      hex_encode (input) {
+        return hex.stringify(utf8.parse(input))
       },
-      hex_decode () {
+      hex_decode (input) {
         let result
-        this.lastAction = this.hex_decode
-        let enc = this.text.input
+        let enc = input
         if (enc.startsWith('0x') || enc.startsWith('0X')) {
           enc = enc.substr(2)
         }
@@ -338,138 +322,105 @@
         } catch (e) {
           result = latin1.stringify(bytes)
         }
-        this.output(result)
+        return result
       },
-      url_encode () {
-        this.lastAction = this.url_encode
-        this.output(encodeURIComponent(this.text.input))
+      url_encode (input) {
+        return encodeURIComponent(input)
       },
-      url_decode () {
-        this.lastAction = this.url_decode
-        this.output(decodeURIComponent(this.text.input))
+      url_decode (input) {
+        return decodeURIComponent(input)
       },
-      url_encode_gb2312 () {
-        this.lastAction = this.url_encode_gb2312
-        this.output(urlencode.encode(this.text.input, 'gbk'))
+      url_encode_gb2312 (input) {
+        return urlencode.encode(input, 'gbk')
       },
-      url_decode_gb2312 () {
-        this.lastAction = this.url_decode_gb2312
-        this.output(urlencode.decode(this.text.input, 'gbk'))
+      url_decode_gb2312 (input) {
+        return urlencode.decode(input, 'gbk')
       },
-      url_all_encode () {
-        this.lastAction = this.url_all_encode
-        this.output(url_encode(this.text.input))
+      url_all_encode (input) {
+        return url_encode(input)
       },
-      html10_encode () {
-        this.lastAction = this.html10_encode
-        let result = this.text.input.split('').map(m => '&#' + m.charCodeAt() + ';').join('')
-        this.output(result)
+      html10_encode (input) {
+        return input.split('').map(m => '&#' + m.charCodeAt() + ';').join('')
       },
-      html10_decode () {
-        this.lastAction = this.html10_decode
-        let result = this.text.input.replace(/&#(\d+);?/g, (match, i) => String.fromCharCode(parseInt(i)))
-        this.output(result)
+      html10_decode (input) {
+        return input.replace(/&#(\d+);?/g, (match, i) => String.fromCharCode(parseInt(i)))
       },
-      html_special_chars () {
-        this.lastAction = this.html_special_chars
-        let result = this.text.input
-          .replace(/&/g, '&amp;')
+      html_special_chars (input) {
+        return input.replace(/&/g, '&amp;')
           .replace(/"/g, '&quot;')
           .replace(/'/g, '&#039;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
-        this.output(result)
       },
-      html16_encode () {
-        this.lastAction = this.html16_encode
-        let result = this.text.input.split('').map(m => '&#x' + m.charCodeAt().toString(16) + ';').join('')
-        this.output(result)
+      html16_encode (input) {
+        return input.split('').map(m => '&#x' + m.charCodeAt().toString(16) + ';').join('')
       },
-      html16_decode () {
-        this.lastAction = this.html16_decode
-        let result = this.text.input.replace(/&#x([a-f0-9]+);?/ig, (match, i) => String.fromCharCode(parseInt(i, 16)))
-        this.output(result)
+      html16_decode (input) {
+        return input.replace(/&#x([a-f0-9]+);?/ig, (match, i) => String.fromCharCode(parseInt(i, 16)))
       },
-      js8_encode () {
-        this.lastAction = this.js8_encode
-        let result = this.text.input.split('').map(m => '\\' + m.charCodeAt().toString(8)).join('')
-        this.output(result)
+      js8_encode (input) {
+        return input.split('').map(m => '\\' + m.charCodeAt().toString(8)).join('')
       },
       js8_decode () {
-        this.lastAction = this.js8_decode
-        let result = this.text.input.replace(/\\([0-7]+)/g, (match, i) => String.fromCharCode(parseInt(i, 8)))
-        this.output(result)
+        return input.replace(/\\([0-7]+)/g, (match, i) => String.fromCharCode(parseInt(i, 8)))
       },
-      js16_encode () {
-        this.lastAction = this.js16_encode
-        let result = this.text.input.split('').map(m => '\\x' + m.charCodeAt().toString(16)).join('')
-        this.output(result)
+      js16_encode (input) {
+        return input.split('').map(m => '\\x' + m.charCodeAt().toString(16)).join('')
       },
-      js16_decode () {
-        this.lastAction = this.js16_decode
-        let result = this.text.input.replace(/\\x([a-f0-9]{1,4})/ig, (match, i) => String.fromCharCode(parseInt(i, 16)))
-        this.output(result)
+      js16_decode (input) {
+        return input.replace(/\\x([a-f0-9]{1,4})/ig, (match, i) => String.fromCharCode(parseInt(i, 16)))
       },
-      unicode_encode () {
-        this.lastAction = this.unicode_encode
-        let result = this.text.input.split('').map(m => {
+      unicode_encode (input) {
+        return input.split('').map(m => {
           let pad = '0000'
           let str = m.charCodeAt().toString(16)
           return '\\u' + pad.substring(0, pad.length - str.length) + str
         }).join('')
-        this.output(result)
       },
-      unicode_decode () {
-        this.lastAction = this.unicode_decode
-        let result = this.text.input.replace(/\\u([a-fA-F0-9]{4})/g, (match, i) => String.fromCharCode(parseInt(i, 16)))
-        this.output(result)
+      unicode_decode (input) {
+        return input.replace(/\\u([a-fA-F0-9]{4})/g, (match, i) => String.fromCharCode(parseInt(i, 16)))
       },
-      string_char_code () {
-        this.lastAction = this.string_char_code
-        let result = this.text.input.split('').map(m => m.charCodeAt()).join(',')
-        this.output(result)
+      string_char_code (input) {
+        return input.split('').map(m => m.charCodeAt()).join(',')
       },
-      to_lower_case () {
-        this.lastAction = this.to_lower_case
-        let result = this.text.input.toLowerCase()
-        this.output(result)
+      to_lower_case (input) {
+        return input.toLowerCase()
       },
-      to_upper_case () {
-        this.lastAction = this.to_lower_case
-        let result = this.multipleInputProcess(function (input) {
-          return input.toUpperCase()
-        })
-
-        this.output(result)
+      to_upper_case (input) {
+        return input.toUpperCase()
       },
-      reverse_text () {
-        this.lastAction = this.reverse_text
-        let result = this.multipleInputProcess(function (input) {
-          let r = ''
-          for (let i = input.length; i >= 0; i--) {
-            r += input.substring(i, i - 1)
-          }
-          return r
-        })
-        this.output(result)
+      reverse_text (input) {
+        let r = ''
+        for (let i = input.length; i >= 0; i--) {
+          r += input.substring(i, i - 1)
+        }
+        return r
       },
       multipleInputProcess (func) {
         let result = ''
         let splitList = this.text.input.split('\n')
         splitList.forEach(function (item, index) {
+          console.log(item)
           if (item !== '') {
             let r = func(item)
-            result += r + '\n\n'
+            result += r + '\n'
           }
         })
+
+        return result
       },
-      frontendConvert (method, multiple = true) {
+      frontend_convert (method, multiple = undefined) {
+        console.log(method)
         this.lastAction = method
         let result = ''
+        if (multiple === undefined) {
+          multiple = this.multipleInput
+        }
+
         if (multiple) {
           result = this.multipleInputProcess(this[method])
         } else {
-          result = this[method]
+          result = this[method](this.text.input)
         }
 
         this.output(result)
