@@ -101,6 +101,10 @@
               {
                 name: '哈希工具',
                 path: 'hashed'
+              },
+              {
+                name: '逆向工具',
+                path: 'reverse'
               }
             ]
           }

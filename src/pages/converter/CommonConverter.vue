@@ -436,15 +436,42 @@
       },
       to_upper_case () {
         this.lastAction = this.to_lower_case
-        let result = this.text.input.toUpperCase()
+        let result = this.multipleInputProcess(function (input) {
+          return input.toUpperCase()
+        })
+
         this.output(result)
       },
       reverse_text () {
         this.lastAction = this.reverse_text
+        let result = this.multipleInputProcess(function (input) {
+          let r = ''
+          for (let i = input.length; i >= 0; i--) {
+            r += input.substring(i, i - 1)
+          }
+          return r
+        })
+        this.output(result)
+      },
+      multipleInputProcess (func) {
         let result = ''
-        for (let i = this.text.input.length; i >= 0; i--) {
-          result += this.text.input.substring(i, i - 1)
+        let splitList = this.text.input.split('\n')
+        splitList.forEach(function (item, index) {
+          if (item !== '') {
+            let r = func(item)
+            result += r + '\n\n'
+          }
+        })
+      },
+      frontendConvert (method, multiple = true) {
+        this.lastAction = method
+        let result = ''
+        if (multiple) {
+          result = this.multipleInputProcess(this[method])
+        } else {
+          result = this[method]
         }
+
         this.output(result)
       }
     },

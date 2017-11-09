@@ -36,7 +36,7 @@
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('shadow_code')">影子密码</el-button>
+              <el-button type="" size="small" @click="backend_convert('shadow_code')">影子密码(01248密码)</el-button>
               <el-button type="" size="small" @click="backend_convert('manchester')">曼彻斯特编码</el-button>
             </div>
 

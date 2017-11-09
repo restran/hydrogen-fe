@@ -9,6 +9,7 @@ import MorseCode from '@/pages/crypto/MorseCode'
 import CommonCrypto from '@/pages/crypto/CommonCrypto'
 import Hashed from '@/pages/misc/Hashed'
 import Develop from '@/pages/misc/Develop'
+import Reverse from '@/pages/misc/Reverse'
 
 Vue.use(Router)
 
@@ -28,6 +29,9 @@ export default new Router({
     },
     {
       path: '/misc/develop', component: Develop
+    },
+    {
+      path: '/misc/reverse', component: Reverse
     },
     {
       path: '/crypto/morse', component: MorseCode
