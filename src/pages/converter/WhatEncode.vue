@@ -14,6 +14,16 @@
           </el-form-item>
         </el-form>
       </el-row>
+
+      <el-row slot="header">
+        <div v-if="schemeList.length > 0">
+          <div style="font-size: 16px; margin-bottom: 5px">可能的编码类型</div>
+          <div class="text item" style="padding: 1px 0" v-for="item in schemeList">
+            <p>{{ item }}</p>
+          </div>
+        </div>
+      </el-row>
+
       <div class="text item" v-for="item in resultList">
         <div style="margin-bottom: 5px">
           <p style="color: #1c8de0">{{ item.methods }}</p>
@@ -38,7 +48,8 @@
           input: '',
           maxDepth: 5
         },
-        resultList: []
+        resultList: [],
+        schemeList: []
       }
     },
     mounted () {
@@ -68,11 +79,12 @@
 
         this.$http.backendConvert('/api/converter/what-encode/', data)
           .then(function (r) {
-            r['data'].forEach(function (item, index) {
+            r['data']['result'].forEach(function (item, index) {
               item['_index'] = index
             })
 
-            self.resultList = r['data']
+            self.schemeList = r['data']['scheme_list']
+            self.resultList = r['data']['result']
           }).catch(function (r) {
           self.$emit('show-error-message', r['msg'])
         })
