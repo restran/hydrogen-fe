@@ -83,6 +83,7 @@
     sha256: (val) => CryptoJS.SHA256(val).toString(),
     sha512: (val) => CryptoJS.SHA512(val).toString()
   }
+
   function magic (value) {
 //    for (let shape of this.$store.state.shape) {
 //      if (shape === 'lower') {
@@ -95,6 +96,7 @@
 //    }
     return value
   }
+
   export default {
     components: {},
     name: 'hashed',
@@ -128,11 +130,14 @@
             code.push(hash)
           }
         }
+        console.log(code)
         code = code.join('').replace(/\s/g, '')
         code = code.replace(/plaintext(?![\(\)])/g, 'plaintext+')
           .replace(/salt(?![\(\)])/g, 'salt+')
           .replace(/\)(?=[a-z0-9])/ig, ')+')
         this.customHashCode = code
+
+        console.log(this.customHashCode)
         try {
           return magic(eval(code))
         } catch (e) {
@@ -191,7 +196,14 @@
         this.tags.splice(this.tags.indexOf(tag), 1)
       }
     },
-    watch: {}
+    watch: {
+      tags (val, oldVal) {
+        this.hashChain = []
+        for (let item of this.tags) {
+          this.hashChain.push(item.name)
+        }
+      }
+    }
   }
 </script>
 
@@ -206,6 +218,7 @@
 .item {
   padding: 5px 0;
 }
+
 .box-card {
   word-wrap: break-word;
   word-break: break-all;

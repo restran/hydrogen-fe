@@ -105,9 +105,9 @@
 
         <el-form-item label="变换选项" style="margin-bottom: 10px">
           <el-button-group>
-            <el-button type="primary" size="mini" @click="reverse_text">反向文本</el-button>
-            <el-button type="primary" size="mini" @click="to_lower_case">转成小写</el-button>
-            <el-button type="primary" size="mini" @click="to_upper_case">转成大写</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('reverse_text')">反向文本</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('to_lower_case')">转成小写</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('to_upper_case')">转成大写</el-button>
           </el-button-group>
           <div style="margin-top: 5px">
             <el-input-number size="small" :min="2" :max="9" :controls="true"
