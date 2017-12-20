@@ -49,28 +49,18 @@
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="frontend_convert('b64encode')">Base64编码</el-button>
-            <el-button type="primary" size="mini" @click="frontend_convert('b64decode')">Base64解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b64encode')">B64编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b64decode')">B64解码</el-button>
           </el-button-group>
           <el-button-group>
-            <el-button type="primary" size="mini" @click="frontend_convert('b32encode')">Base32编码</el-button>
-            <el-button type="primary" size="mini" @click="frontend_convert('b32decode')">Base32解码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b32encode')">B32编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('b32decode')">B32解码</el-button>
           </el-button-group>
 
           <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('html10_encode')">Html10编码</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('html10_decode')">Html10解码</el-button>
           </el-button-group>
-
-          <div>
-            <el-button type="primary" size="mini" @click="frontend_convert('html_special_chars')">Html Special Chars编码
-            </el-button>
-          </div>
-
-          <div>
-            <el-button type="primary" size="mini" @click="frontend_convert('string_char_code')">String Char Code
-            </el-button>
-          </div>
 
           <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('html16_encode')">Html16编码</el-button>
@@ -91,16 +81,31 @@
             <el-button type="primary" size="mini" @click="frontend_convert('unicode_encode')">Unicode编码</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('unicode_decode')">Unicode解码</el-button>
           </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('html_escape', false)">Html转义</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('html_un_escape', false)">Html反转义</el-button>
           </el-button-group>
 
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('xml_escape')">Xml转义</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('xml_un_escape')">Xml反转义</el-button>
+          </el-button-group>
+
           <el-button type="primary" size="mini" @click="frontend_convert('json_format', false)">JSON格式化</el-button>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="frontend_convert('html_special_chars')">Html Special Chars
+            </el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('string_char_code')">String Char Code
+            </el-button>
+          </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('to_uu')">UUEncode编码</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('from_uu')">UUEncode解码</el-button>
           </el-button-group>
+
         </el-form-item>
 
         <el-form-item label="变换选项" style="margin-bottom: 10px">
@@ -361,7 +366,7 @@
       js8_encode (input) {
         return input.split('').map(m => '\\' + m.charCodeAt().toString(8)).join('')
       },
-      js8_decode () {
+      js8_decode (input) {
         return input.replace(/\\([0-7]+)/g, (match, i) => String.fromCharCode(parseInt(i, 8)))
       },
       js16_encode (input) {
