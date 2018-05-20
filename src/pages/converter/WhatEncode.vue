@@ -86,7 +86,7 @@
             self.schemeList = r['data']['scheme_list']
             self.resultList = r['data']['result']
           }).catch(function (r) {
-          self.$emit('show-error-message', r['msg'])
+          self.$eventHub.$emit('show-error-msg', r['msg'])
         })
       },
       onSubmit () {

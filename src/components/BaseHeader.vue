@@ -87,6 +87,20 @@
               {
                 name: '摩斯密码',
                 path: 'morse'
+              },
+              {
+                name: 'RSA工具',
+                path: 'rsa'
+              }
+            ]
+          },
+                    {
+            name: 'HTTP工具',
+            basePath: '/http/',
+            children: [
+              {
+                name: 'Repeater',
+                path: 'repeater'
               }
             ]
           },

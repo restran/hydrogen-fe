@@ -4,7 +4,7 @@
         <el-col :span="18">
             <el-row type="flex" class="clearfix" justify="center" :gutter="20" align="middle">
                 <el-col :span="2">
-                    User-Agent
+                    UA
                 </el-col>
                 <el-col :span="18">
                     <el-input v-model="userAgent" :readonly="true" class="ua"></el-input>

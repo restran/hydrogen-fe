@@ -244,7 +244,7 @@
             self.output(r['data'])
           })
           .catch(function (r) {
-            self.$emit('show-error-message', r['msg'])
+            self.$eventHub.$emit('show-error-msg', r['msg'])
           })
       },
       b64encode (input) {

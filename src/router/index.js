@@ -7,9 +7,13 @@ import WhatEncode from '@/pages/converter/WhatEncode'
 
 import MorseCode from '@/pages/crypto/MorseCode'
 import CommonCrypto from '@/pages/crypto/CommonCrypto'
+import RSA from '@/pages/crypto/RSA'
+
 import Hashed from '@/pages/misc/Hashed'
 import Develop from '@/pages/misc/Develop'
 import Reverse from '@/pages/misc/Reverse'
+
+import Repeater from '@/pages/http/Repeater'
 
 Vue.use(Router)
 
@@ -25,6 +29,9 @@ export default new Router({
       path: '/converter/what-encode', component: WhatEncode
     },
     {
+      path: '/http/repeater', component: Repeater
+    },
+    {
       path: '/misc/hashed', component: Hashed
     },
     {
@@ -38,6 +45,9 @@ export default new Router({
     },
     {
       path: '/crypto/common', component: CommonCrypto
+    },
+        {
+      path: '/crypto/rsa', component: RSA
     },
     {
       path: '*', redirect: '/converter/common'

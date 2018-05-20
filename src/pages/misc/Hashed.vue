@@ -132,9 +132,9 @@
         }
         console.log(code)
         code = code.join('').replace(/\s/g, '')
-        code = code.replace(/plaintext(?![\(\)])/g, 'plaintext+')
-          .replace(/salt(?![\(\)])/g, 'salt+')
-          .replace(/\)(?=[a-z0-9])/ig, ')+')
+        code = code.replace(/plaintext(?![\(\)])/g, 'plaintext+').
+          replace(/salt(?![\(\)])/g, 'salt+').
+          replace(/\)(?=[a-z0-9])/ig, ')+')
         this.customHashCode = code
 
         console.log(this.customHashCode)
@@ -207,25 +207,26 @@
   }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus">.row-bg {
-  margin-bottom: 30px;
-}
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  .row-bg {
+    margin-bottom: 30px;
+  }
 
-.text {
-  font-size: 14px;
-}
+  .text {
+    font-size: 14px;
+  }
 
-.item {
-  padding: 5px 0;
-}
+  .item {
+    padding: 5px 0;
+  }
 
-.box-card {
-  word-wrap: break-word;
-  word-break: break-all;
-}
+  .box-card {
+    word-wrap: break-word;
+    word-break: break-all;
+  }
 
-.tag {
-  margin: 0 10px 5px 0;
-}
+  .tag {
+    margin: 0 10px 5px 0;
+  }
 
 </style>
