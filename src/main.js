@@ -8,7 +8,8 @@ import axios from 'axios'
 import router from './router'
 import ElementUI from 'element-ui'
 import VueAnalytics from 'vue-analytics'
-import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-default/index.css'
 import VueClipboard from "vue-clipboard2"
 
 axios.defaults.headers.common['X-CSRFToken'] = Utils.getCookie('csrftoken')

@@ -11,12 +11,14 @@
             <el-col :span="12">
               <el-form-item label="IDA基地址">
                 <el-input v-model="form.idaBaseAddress" @change="computeAddress"
+                          size="medium"
                           placeholder="16进制地址"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="OD基地址">
                 <el-input v-model="form.odBaseAddress" @change="computeAddress"
+                          size="medium"
                           placeholder="16进制地址"></el-input>
               </el-form-item>
             </el-col>
@@ -26,6 +28,7 @@
             <el-col :span="12">
               <el-form-item label="IDA地址">
                 <el-input v-model="form.idaAddress" @change="computeAddress"
+                          size="medium"
                           placeholder="16进制地址"></el-input>
               </el-form-item>
             </el-col>
@@ -33,6 +36,7 @@
             <el-col :span="12">
               <el-form-item label="OD地址（转换后）">
                 <el-input v-model="form.odConverted"
+                          size="medium"
                           placeholder=""></el-input>
               </el-form-item>
             </el-col>
@@ -42,6 +46,7 @@
             <el-col :span="12">
               <el-form-item label="OD地址">
                 <el-input v-model="form.odAddress" @change="computeAddress"
+                          size="medium"
                           placeholder="16进制地址"></el-input>
               </el-form-item>
             </el-col>
@@ -49,6 +54,7 @@
             <el-col :span="12">
               <el-form-item label="IDA地址（转换后）">
                 <el-input v-model="form.idaConverted"
+                          size="medium"
                           placeholder=""></el-input>
               </el-form-item>
             </el-col>

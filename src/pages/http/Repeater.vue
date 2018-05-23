@@ -6,7 +6,7 @@
       </div>
 
       <div>
-        <el-form :model="form" :label-width="'100'">
+        <el-form :model="form" :label-width="'100'" size="medium">
           <el-row :gutter="20">
             <el-col :span="12">
               <el-form-item label="请求地址">
@@ -17,7 +17,7 @@
             <el-col :span="12">
               <el-form-item label="操作">
                 <div style="width: 100%; position: relative; display: inline-block">
-                  <el-button type="primary" @click="onSubmit">发送</el-button>
+                  <el-button type="primary" size="medium" @click="onSubmit">发送</el-button>
                 </div>
               </el-form-item>
             </el-col>

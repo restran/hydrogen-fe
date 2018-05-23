@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card row-bg" style="max-width: 800px; margin: 0 auto">
       <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
-        <el-form ref="form" :model="form" :label-position="'top'"
+        <el-form ref="form" :model="form" :label-position="'top'" size="medium"
                  label-width="80px" style="width: 100%; padding: 0 10px">
           <el-form-item label="最大深度">
             <el-input-number v-model="form.maxDepth" :min="1" :max="100"></el-input-number>

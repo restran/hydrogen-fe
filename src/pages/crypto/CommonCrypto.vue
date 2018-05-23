@@ -5,43 +5,43 @@
         <el-form ref="form" label-position="top" label-width="80px">
           <el-form-item label="解密方式" style="margin-bottom: 10px">
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('caesar')">凯撒密码</el-button>
-              <el-button type="" size="small" @click="backend_convert('rot13')">ROT13</el-button>
-              <el-button type="" size="small" @click="backend_convert('atbash_cipher')">埃特巴什码</el-button>
+              <el-button type="" size="mini" @click="backend_convert('caesar')">凯撒密码</el-button>
+              <el-button type="" size="mini" @click="backend_convert('rot13')">ROT13</el-button>
+              <el-button type="" size="mini" @click="backend_convert('atbash_cipher')">埃特巴什码</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('caesar_printable')">可见字符凯撒</el-button>
-              <el-button type="" size="small" @click="backend_convert('caesar_odd_even')">奇偶不同凯撒</el-button>
+              <el-button type="" size="mini" @click="backend_convert('caesar_printable')">可见字符凯撒</el-button>
+              <el-button type="" size="mini" @click="backend_convert('caesar_odd_even')">奇偶不同凯撒</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('rail_fence')">栅栏密码</el-button>
-              <el-button type="" size="small" @click="backend_convert('caesar_rail_fence')">栅栏凯撒</el-button>
+              <el-button type="" size="mini" @click="backend_convert('rail_fence')">栅栏密码</el-button>
+              <el-button type="" size="mini" @click="backend_convert('caesar_rail_fence')">栅栏凯撒</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('polybius_square')">波利比奥斯棋盘</el-button>
-              <el-button type="" size="small" @click="backend_convert('xxencode')">XXEncode</el-button>
+              <el-button type="" size="mini" @click="backend_convert('polybius_square')">波利比奥斯棋盘</el-button>
+              <el-button type="" size="mini" @click="backend_convert('xxencode')">XXEncode</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('bacon_cipher')">培根密码</el-button>
-              <el-button type="" size="small" @click="backend_convert('bacon_case_cipher')">大小写变形培根密码</el-button>
+              <el-button type="" size="mini" @click="backend_convert('bacon_cipher')">培根密码</el-button>
+              <el-button type="" size="mini" @click="backend_convert('bacon_case_cipher')">大小写变形培根密码</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('mobile_keyboard')">手机9宫格</el-button>
-              <el-button type="" size="small" @click="backend_convert('qwerty_cipher')">PC键盘QWERTY</el-button>
+              <el-button type="" size="mini" @click="backend_convert('mobile_keyboard')">手机9宫格</el-button>
+              <el-button type="" size="mini" @click="backend_convert('qwerty_cipher')">PC键盘QWERTY</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('shadow_code')">影子密码(01248密码)</el-button>
-              <el-button type="" size="small" @click="backend_convert('manchester')">曼彻斯特编码</el-button>
+              <el-button type="" size="mini" @click="backend_convert('shadow_code')">影子密码(01248密码)</el-button>
+              <el-button type="" size="mini" @click="backend_convert('manchester')">曼彻斯特编码</el-button>
             </div>
 
             <div class="button-group">
-              <el-button type="" size="small" @click="backend_convert('quoted_printable')">Quoted-printable编码
+              <el-button type="" size="mini" @click="backend_convert('quoted_printable')">Quoted-printable编码
               </el-button>
             </div>
 

@@ -7,7 +7,7 @@
             <el-card class="box-card row-bg">
               <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
                 <el-col :span="5">
-                  <el-select v-model="selectOption" placeholder="请选择">
+                  <el-select v-model="selectOption" size="medium" placeholder="请选择">
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -18,15 +18,15 @@
                 </el-col>
                 <el-col :span="15">
                   <el-input
+                    size="medium"
                     type="text"
                     placeholder="多个数据使用空格隔开"
                     v-model="value">
                   </el-input>
                 </el-col>
                 <el-col :span="4">
-                  <el-button @click="convertData">转换</el-button>
+                  <el-button @click="convertData" size="medium">转换</el-button>
                 </el-col>
-
               </el-row>
               <div class="text item" v-for="item in result">
                 <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">

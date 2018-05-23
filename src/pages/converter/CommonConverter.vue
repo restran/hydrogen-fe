@@ -132,14 +132,14 @@
             <div style="width: 115px;display: inline-block;">将输出作为输入</div>
             <el-switch
               v-model="outputAsInput"
-              on-color="#13ce66">
+              active-color="#13ce66">
             </el-switch>
           </div>
           <div>
             <div style="width: 115px;display: inline-block;">换行分割多条输入</div>
             <el-switch
               v-model="multipleInput"
-              on-color="#13ce66">
+              active-color="#13ce66">
             </el-switch>
           </div>
         </el-form-item>
@@ -437,10 +437,10 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .text-area
-    margin-left 260px
+    margin-left 265px
 
   .button-area
-    max-width 245px
+    max-width 255px
 
 </style>
 

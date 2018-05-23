@@ -8,6 +8,7 @@
               <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
                 <el-col :span="20">
                   <el-input
+                    size="medium"
                     type="text"
                     placeholder="明文"
                     v-model="plaintext">
@@ -15,6 +16,7 @@
                 </el-col>
                 <el-col :span="4">
                   <el-input
+                    size="medium"
                     type="text"
                     placeholder="Salt"
                     v-model="salt">

@@ -1,8 +1,7 @@
 <template>
   <div>
-
     <el-card class="box-card" style="max-width: 750px; margin: 0 auto">
-      <el-form ref="form" :model="form" label-position="top" label-width="80px">
+      <el-form ref="form" :model="form" label-position="top" label-width="80px" size="medium">
         <el-form-item label="输入" style="margin-bottom: 10px">
           <el-input type="textarea" :rows="6" v-model="form.input"></el-input>
         </el-form-item>
