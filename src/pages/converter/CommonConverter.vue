@@ -129,14 +129,14 @@
           </div>
 
           <div>
-            <div style="width: 115px;display: inline-block;">将输出作为输入</div>
+            <div style="width: 115px;display: inline-block; color: #606266">将输出作为输入</div>
             <el-switch
               v-model="outputAsInput"
               active-color="#13ce66">
             </el-switch>
           </div>
           <div>
-            <div style="width: 115px;display: inline-block;">换行分割多条输入</div>
+            <div style="width: 115px;display: inline-block; color: #606266">换行分割多条输入</div>
             <el-switch
               v-model="multipleInput"
               active-color="#13ce66">

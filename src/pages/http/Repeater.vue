@@ -2,7 +2,7 @@
   <div class="card-container">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span style="line-height: 36px;">HTTP Repeater</span>
+        <span>HTTP Repeater</span>
       </div>
 
       <div>

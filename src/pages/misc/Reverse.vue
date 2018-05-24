@@ -2,7 +2,7 @@
   <div class="card-container">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span style="line-height: 36px;">OD和IDA地址互转</span>
+        <span>OD和IDA地址互转</span>
       </div>
 
       <div>

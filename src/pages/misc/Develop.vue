@@ -16,12 +16,12 @@
         <el-form-item label="时间戳">
           <el-row type="flex" class="clearfix" :gutter="20">
             <el-col :span="8">
-              <el-input v-model="time.now" :readonly="true"></el-input>
+              <el-input v-model="time.now" size="medium" :readonly="true"></el-input>
             </el-col>
             <el-col :span="8">
               <el-form-item>
-                <el-button @click="pause" type="primary">{{ time.action }}</el-button>
-                <el-button v-clipboard:copy="copyData()">复制</el-button>
+                <el-button @click="pause" size="medium" type="primary">{{ time.action }}</el-button>
+                <el-button size="medium" v-clipboard:copy="copyData()">复制</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -30,19 +30,19 @@
         <el-form-item label="转换">
           <el-row type="flex" class="clearfix" :gutter="20">
             <el-col :span="8">
-              <el-input v-model="transformation.input" placeholder="日期或时间戳"></el-input>
+              <el-input v-model="transformation.input" size="medium" placeholder="日期或时间戳"></el-input>
             </el-col>
             <el-col :span="16">
               <el-form-item>
-                <el-button type="primary" @click="toTimestamp">转成时间戳</el-button>
-                <el-button type="primary" @click="toDate">转成日期</el-button>
+                <el-button type="primary" size="medium" @click="toTimestamp">转成时间戳</el-button>
+                <el-button type="primary" size="medium" @click="toDate">转成日期</el-button>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-input v-model="transformation.output"></el-input>
+              <el-input size="medium" v-model="transformation.output"></el-input>
             </el-col>
           </el-row>
         </el-form-item>
@@ -50,10 +50,10 @@
         <el-form-item label="随机数">
           <el-row type="flex" class="clearfix" :gutter="20">
             <el-col :span="8">
-              <el-input v-model="random.range[0]" placeholder="最小值"></el-input>
+              <el-input size="medium" v-model="random.range[0]" placeholder="最小值"></el-input>
             </el-col>
             <el-col :span="8">
-              <el-input v-model="random.range[1]" placeholder="最大值"></el-input>
+              <el-input size="medium" v-model="random.range[1]" placeholder="最大值"></el-input>
             </el-col>
             <el-col :span="8">
               <el-form-item>
@@ -64,7 +64,7 @@
 
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-input v-model="random.number"></el-input>
+              <el-input size="medium" v-model="random.number"></el-input>
             </el-col>
           </el-row>
         </el-form-item>
@@ -72,7 +72,7 @@
         <el-form-item label="随机串">
           <el-row type="flex" class="clearfix" :gutter="20">
             <el-col :span="8">
-              <el-select v-model="random.length" filterable placeholder="长度" @change="generateRandom">
+              <el-select size="medium" v-model="random.length" filterable placeholder="长度" @change="generateRandom">
                 <el-option
                   v-for="item in 100"
                   :key="item"
@@ -83,14 +83,14 @@
             </el-col>
             <el-col :span="8">
               <el-form-item>
-                <el-button @click="generateRandom" type="primary">生成</el-button>
+                <el-button size="medium" @click="generateRandom" type="primary">生成</el-button>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-row :gutter="20">
             <el-col :span="20">
-              <el-input v-model="random.value"></el-input>
+              <el-input size="medium" v-model="random.value"></el-input>
             </el-col>
           </el-row>
         </el-form-item>
