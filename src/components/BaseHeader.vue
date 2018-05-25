@@ -89,6 +89,10 @@
                 path: 'morse'
               },
               {
+                name: 'AES工具',
+                path: 'aes'
+              },
+              {
                 name: 'RSA工具',
                 path: 'rsa'
               }

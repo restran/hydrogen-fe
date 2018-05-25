@@ -18,7 +18,7 @@
             <el-col :span="8">
               <el-input v-model="time.now" size="medium" :readonly="true"></el-input>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="16">
               <el-form-item>
                 <el-button @click="pause" size="medium" type="primary">{{ time.action }}</el-button>
                 <el-button size="medium" v-clipboard:copy="copyData()">复制</el-button>

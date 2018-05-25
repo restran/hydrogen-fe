@@ -8,6 +8,7 @@ import WhatEncode from '@/pages/converter/WhatEncode'
 import MorseCode from '@/pages/crypto/MorseCode'
 import CommonCrypto from '@/pages/crypto/CommonCrypto'
 import RSA from '@/pages/crypto/RSA'
+import AES from '@/pages/crypto/AES'
 
 import Hashed from '@/pages/misc/Hashed'
 import Develop from '@/pages/misc/Develop'
@@ -46,8 +47,11 @@ export default new Router({
     {
       path: '/crypto/common', component: CommonCrypto
     },
-        {
+    {
       path: '/crypto/rsa', component: RSA
+    },
+    {
+      path: '/crypto/aes', component: AES
     },
     {
       path: '*', redirect: '/converter/common'

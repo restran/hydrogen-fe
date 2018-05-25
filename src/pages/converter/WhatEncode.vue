@@ -5,7 +5,7 @@
         <el-form ref="form" :model="form" :label-position="'top'" size="medium"
                  label-width="80px" style="width: 100%; padding: 0 10px">
           <el-form-item label="最大深度">
-            <el-input-number v-model="form.maxDepth" :min="1" :max="100"></el-input-number>
+            <el-input-number style="width: 150px" v-model="form.maxDepth" :min="1" :max="100"></el-input-number>
             <el-button type="primary" style="margin-left: 10px" @click="onSubmit">测试</el-button>
           </el-form-item>
 

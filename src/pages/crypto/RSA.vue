@@ -1,6 +1,10 @@
 <template>
   <div class="card-container">
     <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>RSA工具</span>
+      </div>
+
       <el-form :model="rsaForm" :label-width="'100'" size="medium">
         <el-row :gutter="20">
           <el-col :span="12">
@@ -41,10 +45,10 @@
           <el-form :model="pemForm" :label-width="'100'" size="medium">
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="24" style="text-align: center">
-                <el-button icon="arrow-up" type="primary" size="medium"
+                <el-button icon="el-icon-arrow-up" type="primary" size="medium"
                            @click="pemProcess('from_pem')">识别PEM格式
                 </el-button>
-                <el-button icon="arrow-down" size="medium"
+                <el-button icon="el-icon-arrow-down" size="medium"
                            @click="pemProcess('to_pem')">转成PEM格式
                 </el-button>
               </el-col>
@@ -66,10 +70,10 @@
           <el-form :model="encryptForm" :label-width="'100'" size="medium">
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="24" style="text-align: center">
-                <el-button icon="arrow-left" size="medium"
+                <el-button icon="el-icon-arrow-left" size="medium" type="primary"
                            @click="encryptProcess('decrypt')">解密
                 </el-button>
-                <el-button icon="arrow-right" size="medium"
+                <el-button icon="el-icon-arrow-right" size="medium" type="primary"
                            @click="encryptProcess('encrypt')">加密
                 </el-button>
               </el-col>
@@ -91,8 +95,6 @@
                 </el-form-item>
               </el-col>
             </el-row>
-
-
           </el-form>
         </el-tab-pane>
       </el-tabs>
