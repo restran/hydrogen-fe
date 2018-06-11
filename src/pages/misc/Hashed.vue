@@ -26,13 +26,15 @@
               <div class="text item" v-for="item in hashed">
                 <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
                   <el-col :span="4">{{ item.label }}</el-col>
-                  <el-col :span="20"><code>{{ item.action() }}</code></el-col>
+                  <el-col :span="20"><code v-clipboard:copy="item.action()"
+                                           v-clipboard:success="onCopy">{{ item.action() }}</code></el-col>
                 </el-row>
               </div>
               <div class="text item" v-if="tags.length">
                 <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
                   <el-col :span="4">自定义</el-col>
-                  <el-col :span="20"><code>{{ customResult }}</code></el-col>
+                  <el-col :span="20"><code v-clipboard:copy="customResult"
+                                           v-clipboard:success="onCopy">{{ customResult }}</code></el-col>
                 </el-row>
               </div>
             </el-card>
@@ -134,9 +136,9 @@
         }
         console.log(code)
         code = code.join('').replace(/\s/g, '')
-        code = code.replace(/plaintext(?![\(\)])/g, 'plaintext+').
-          replace(/salt(?![\(\)])/g, 'salt+').
-          replace(/\)(?=[a-z0-9])/ig, ')+')
+        code = code.replace(/plaintext(?![\(\)])/g, 'plaintext+')
+          .replace(/salt(?![\(\)])/g, 'salt+')
+          .replace(/\)(?=[a-z0-9])/ig, ')+')
         this.customHashCode = code
 
         console.log(this.customHashCode)
@@ -196,6 +198,9 @@
       },
       pop (tag) {
         this.tags.splice(this.tags.indexOf(tag), 1)
+      },
+      onCopy (e) {
+        this.$eventHub.$emit('show-success-msg', '已复制')
       }
     },
     watch: {

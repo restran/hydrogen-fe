@@ -9,8 +9,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 import VueAnalytics from 'vue-analytics'
 import 'element-ui/lib/theme-chalk/index.css'
-// import 'element-ui/lib/theme-default/index.css'
-import VueClipboard from "vue-clipboard2"
+import VueClipboard from 'vue-clipboard2'
+import VueProgressBar from 'vue-progressbar'
 
 axios.defaults.headers.common['X-CSRFToken'] = Utils.getCookie('csrftoken')
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8'
@@ -20,6 +20,22 @@ Vue.use(VueClipboard)
 Vue.use(VueAnalytics, {
   id: 'UA-38277310-6'
 })
+
+const options = {
+  color: '#22df80',
+  failedColor: '#F56C6C',
+  thickness: '2px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+}
+
+Vue.use(VueProgressBar, options)
 
 router.afterEach(function (to) {
   if (window.ga) {
@@ -39,7 +55,7 @@ Vue.prototype.$store = Store
 Vue.prototype.$eventHub = new Vue()
 
 /* eslint-disable no-new */
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   // template: '<App/>',
@@ -47,3 +63,12 @@ new Vue({
   render: h => h(App)
 })
 
+axios.interceptors.request.use(config => {
+    app.$Progress.start(); // for every request start the progress
+    return config;
+});
+
+axios.interceptors.response.use(response => {
+    app.$Progress.finish(); // finish when a response is received
+    return response;
+});

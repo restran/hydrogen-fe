@@ -66,9 +66,12 @@ function parseHttpError (error, reject) {
 
 let http = {
   get: function (url, paramsData, loginRedirect = true) {
-    if (window.Pace !== undefined) {
-      window.Pace.restart()
-    }
+    setTimeout(function () {
+      if (window.Pace !== undefined) {
+        window.Pace.restart()
+      }
+    }, 50)
+
     return new Promise(function (resolve, reject) {
       console.log(paramsData)
       axios.get(
@@ -83,9 +86,11 @@ let http = {
     })
   },
   post: function (url, postData, loginRedirect = true) {
-    if (window.Pace !== undefined) {
-      window.Pace.restart()
-    }
+    setTimeout(function () {
+      if (window.Pace !== undefined) {
+        window.Pace.restart()
+      }
+    }, 50)
 
     console.log(postData)
     return new Promise(function (resolve, reject) {

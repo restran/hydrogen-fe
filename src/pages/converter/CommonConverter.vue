@@ -232,7 +232,10 @@
         this.lastAction = this.backend_convert
         let data = {
           'method': method,
-          'data': this.text.input
+          'data': this.text.input,
+          'params': {
+            'multiple_input': this.multipleInput
+          }
         }
 
         if (method === 'to_digital' || method === 'from_digital') {
@@ -251,6 +254,7 @@
         return base64.stringify(utf8.parse(input))
       },
       b64decode (input) {
+        input = input.replace(/[\n|\s]/g, '')
         let result
         let bytes = base64.parse(input)
         try {
@@ -264,6 +268,7 @@
         return base32.encode(input)
       },
       b32decode (input) {
+        input = input.replace(/[\n|\s]/g, '')
         return base32.decode(input)
       },
       html_escape (input) {

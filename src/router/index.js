@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Converter from '@/pages/converter/CommonConverter'
 import DigitConverter from '@/pages/converter/DigitConverter'
 import WhatEncode from '@/pages/converter/WhatEncode'
+import FileConverter from '@/pages/converter/FileConverter'
 
 import MorseCode from '@/pages/crypto/MorseCode'
 import CommonCrypto from '@/pages/crypto/CommonCrypto'
@@ -15,6 +16,7 @@ import Develop from '@/pages/misc/Develop'
 import Reverse from '@/pages/misc/Reverse'
 
 import Repeater from '@/pages/http/Repeater'
+import Proxy from '@/pages/http/Proxy'
 
 Vue.use(Router)
 
@@ -30,7 +32,13 @@ export default new Router({
       path: '/converter/what-encode', component: WhatEncode
     },
     {
+      path: '/converter/file-converter', component: FileConverter
+    },
+    {
       path: '/http/repeater', component: Repeater
+    },
+    {
+      path: '/http/proxy', component: Proxy
     },
     {
       path: '/misc/hashed', component: Hashed

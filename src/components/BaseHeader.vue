@@ -71,6 +71,10 @@
                 path: 'digit'
               },
               {
+                name: '文件转换',
+                path: 'file-converter'
+              },
+              {
                 name: 'WhatEncode',
                 path: 'what-encode'
               }
@@ -98,10 +102,14 @@
               }
             ]
           },
-                    {
+          {
             name: 'HTTP工具',
             basePath: '/http/',
             children: [
+              {
+                name: 'Proxy',
+                path: 'proxy'
+              },
               {
                 name: 'Repeater',
                 path: 'repeater'

@@ -1,9 +1,9 @@
 <template>
   <div class="card-container">
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>AES工具</span>
-      </div>
+      <!--<div slot="header" class="clearfix">-->
+        <!--<span>AES工具</span>-->
+      <!--</div>-->
 
       <el-form :model="form" size="medium" label-position="top">
         <el-row :gutter="20">
@@ -11,9 +11,9 @@
             <el-form-item label="Key (密钥长度128/196/256位，16/24/32字节)">
               <el-input placeholder="" v-model="form.key" class="input-with-select">
                 <el-select v-model="form.key_encoding" slot="prepend" style="width: 95px;">
-                  <el-option label="Hex" value="hex"></el-option>
-                  <el-option label="UTF8" value="utf8"></el-option>
-                  <el-option label="Base64" value="base64"></el-option>
+                  <el-option label="Hex" value="Hex"></el-option>
+                  <el-option label="UTF8" value="UTF8"></el-option>
+                  <el-option label="Base64" value="Base64"></el-option>
                 </el-select>
               </el-input>
             </el-form-item>
@@ -23,9 +23,9 @@
             <el-form-item label="IV (128位16字节，与分组大小相同)">
               <el-input placeholder="" v-model="form.iv" class="input-with-select">
                 <el-select v-model="form.iv_encoding" slot="prepend" style="width: 95px;">
-                  <el-option label="Hex" value="hex"></el-option>
-                  <el-option label="UTF8" value="hex"></el-option>
-                  <el-option label="Base64" value="base64"></el-option>
+                  <el-option label="Hex" value="Hex"></el-option>
+                  <el-option label="UTF8" value="UTF8"></el-option>
+                  <el-option label="Base64" value="Base64"></el-option>
                 </el-select>
               </el-input>
             </el-form-item>
@@ -62,7 +62,7 @@
           <el-col :span="12">
             <el-form-item label="Plain Format">
               <el-select v-model="form.plain_encoding">
-                <el-option label="UTF8" value="hex"></el-option>
+                <el-option label="UTF8" value="UTF8"></el-option>
                 <el-option label="Hex" value="Hex"></el-option>
                 <el-option label="Base64" value="Base64"></el-option>
               </el-select>

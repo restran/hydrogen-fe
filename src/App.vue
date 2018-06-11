@@ -6,6 +6,8 @@
         <router-view></router-view>
       </keep-alive>
     </div>
+    <!-- set progressbar -->
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
@@ -15,13 +17,16 @@
 </style>
 
 <script>
-  import Utils from './utils'
   import BaseHeader from '@/components/BaseHeader'
 
   export default {
     name: 'app',
     components: {
       BaseHeader
+    },
+    mounted () {
+      //  [App.vue specific] When App.vue is finish loading finish the progress bar
+      this.$Progress.finish()
     },
     created: function () {
       this.$eventHub.$on('change-title', this.changeTitle)
@@ -31,6 +36,27 @@
       this.$eventHub.$on('show-warning-msg', this.showWarningMsg)
       this.$eventHub.$on('show-info-msg', this.showInfoMsg)
       this.$eventHub.$on('show-confirm-dlg', this.showConfirmDlg)
+
+      //  [App.vue specific] When App.vue is first loaded start the progress bar
+      this.$Progress.start()
+      //  hook the progress bar to start before we move router-view
+      this.$router.beforeEach((to, from, next) => {
+        //  does the page we want to go to have a meta.progress object
+        if (to.meta.progress !== undefined) {
+          let meta = to.meta.progress
+          // parse meta tags
+          this.$Progress.parseMeta(meta)
+        }
+        //  start the progress bar
+        this.$Progress.start()
+        //  continue to next page
+        next()
+      })
+      //  hook the progress bar to finish after we've finished moving router-view
+      this.$router.afterEach((to, from) => {
+        //  finish the progress bar
+        this.$Progress.finish()
+      })
     },
     methods: {
       showMessage (type, msg) {

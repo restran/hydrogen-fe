@@ -4,61 +4,29 @@
       <div slot="header" class="clearfix">
         <span>文件转换</span>
       </div>
-
       <div>
-        <el-form :model="form" :label-width="'100'">
-          <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item label="IDA基地址">
-                <el-input v-model="form.idaBaseAddress" @change="computeAddress"
-                          size="medium"
-                          placeholder="16进制地址"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="OD基地址">
-                <el-input v-model="form.odBaseAddress" @change="computeAddress"
-                          size="medium"
-                          placeholder="16进制地址"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
 
-          <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item label="IDA地址">
-                <el-input v-model="form.idaAddress" @change="computeAddress"
-                          size="medium"
-                          placeholder="16进制地址"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="12">
-              <el-form-item label="OD地址（转换后）">
-                <el-input v-model="form.odConverted"
-                          size="medium"
-                          placeholder=""></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="20">
-            <el-col :span="12">
-              <el-form-item label="OD地址">
-                <el-input v-model="form.odAddress" @change="computeAddress"
-                          size="medium"
-                          placeholder="16进制地址"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="12">
-              <el-form-item label="IDA地址（转换后）">
-                <el-input v-model="form.idaConverted"
-                          size="medium"
-                          placeholder=""></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
+        <el-form :model="form" label-position="top">
+          <el-form-item label="转换类型">
+            <el-select v-model="form.encoding">
+              <el-option label="Hex" value="Hex"></el-option>
+              <el-option label="UTF8" value="UTF8"></el-option>
+              <el-option label="Base64" value="Base64"></el-option>
+              <el-option label="Decimal" value="Decimal"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="">
+            <el-upload
+              :data="{'encoding': form.encoding}"
+              name="file"
+              :on-success="fileUploadSuccess"
+              action="/api/converter/file-converter/">
+              <el-button size="small" type="primary">点击上传</el-button>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="文件内容">
+            <el-input type="textarea" :rows="8" v-model="form.content"></el-input>
+          </el-form-item>
         </el-form>
       </div>
     </el-card>
@@ -71,12 +39,8 @@
     data () {
       return {
         form: {
-          odBaseAddress: '00040000',
-          idaBaseAddress: '00400000',
-          odAddress: '',
-          idaAddress: '',
-          odConverted: '',
-          idaConverted: ''
+          encoding: 'Hex',
+          content: ''
         }
       }
     },
@@ -91,30 +55,12 @@
     },
     computed: {},
     methods: {
-
-      computeAddress () {
-        let odBaseAddress = this.$utils.hex2Dec(this.form.odBaseAddress)
-        let idaBaseAddress = this.$utils.hex2Dec(this.form.idaBaseAddress)
-        let idaAddress = this.$utils.hex2Dec(this.form.idaAddress)
-        let odAddress = this.$utils.hex2Dec(this.form.odAddress)
-
-        if (isNaN(odBaseAddress) || isNaN(idaBaseAddress)) {
-          return
+      fileUploadSuccess (response, file) {
+        console.log(response)
+        if (typeof response === 'string') {
+          response = JSON.parse(response)
         }
-
-        if (isNaN(idaAddress)) {
-          this.form.odConverted = ''
-        } else {
-          this.form.odConverted = this.$utils.dec2hex(idaAddress - idaBaseAddress + odBaseAddress)
-          this.form.odConverted = this.$utils.formatStrLength(this.form.odConverted, 8, '0')
-        }
-
-        if (isNaN(odAddress)) {
-          this.form.idaConverted = ''
-        } else {
-          this.form.idaConverted = this.$utils.dec2hex(odAddress - odBaseAddress + idaBaseAddress)
-          this.form.idaConverted = this.$utils.formatStrLength(this.form.idaConverted, 8, '0')
-        }
+        this.form.content = response['data']['content']
       }
     },
     watch: {}

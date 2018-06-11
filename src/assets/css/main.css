@@ -79,3 +79,15 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
+.el-button--mini {
+  padding: 5px !important;
+}
+.el-form-item__label {
+  line-height: 30px !important;
+}
+.el-form--label-top .el-form-item__label {
+  padding-bottom: 0 !important;
+}
+.el-tabs__item {
+  font-weight: normal !important;
+}
