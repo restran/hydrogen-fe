@@ -18,6 +18,7 @@
             <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('rail_fence')">栅栏密码</el-button>
               <el-button type="" size="mini" @click="backend_convert('caesar_rail_fence')">栅栏凯撒</el-button>
+              <el-button type="" size="mini" @click="backend_convert('modified_base64')">变形Base64</el-button>
             </div>
 
             <div class="button-group">
@@ -43,6 +44,9 @@
             <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('quoted_printable')">Quoted-printable编码
               </el-button>
+                     <el-button type="" size="mini" @click="backend_convert('char_count')">字符频率统计
+              </el-button>
+
             </div>
 
           </el-form-item>

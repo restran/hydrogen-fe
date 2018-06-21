@@ -11,6 +11,7 @@
             <el-button type="primary" size="mini" @click="backend_convert('hex2dec')">Hex2Dec</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('dec2hex')">Dec2Hex</el-button>
           </el-button-group>
+
           <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('bin2dec')">Bin2Dec</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('dec2bin')">Dec2Bin</el-button>
@@ -58,6 +59,18 @@
           </el-button-group>
 
           <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('b642hex')">B642Hex</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('hex2b64')">Hex2B64</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('url_safe_b64encode')">UrlSafe B64编码
+            </el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('url_safe_b64decode')">UrlSafe B64解码
+            </el-button>
+          </el-button-group>
+
+          <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('html10_encode')">Html10编码</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('html10_decode')">Html10解码</el-button>
           </el-button-group>
@@ -78,21 +91,14 @@
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="frontend_convert('unicode_encode')">Unicode编码</el-button>
-            <el-button type="primary" size="mini" @click="frontend_convert('unicode_decode')">Unicode解码</el-button>
-          </el-button-group>
-
-          <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('html_escape', false)">Html转义</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('html_un_escape', false)">Html反转义</el-button>
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="backend_convert('xml_escape')">Xml转义</el-button>
-            <el-button type="primary" size="mini" @click="backend_convert('xml_un_escape')">Xml反转义</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('xml_escape', false)">Xml转义</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('xml_un_escape', false)">Xml反转义</el-button>
           </el-button-group>
-
-          <el-button type="primary" size="mini" @click="frontend_convert('json_format', false)">JSON格式化</el-button>
 
           <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('html_special_chars')">Html Special Chars
@@ -106,6 +112,15 @@
             <el-button type="primary" size="mini" @click="backend_convert('from_uu')">UUEncode解码</el-button>
           </el-button-group>
 
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="frontend_convert('unicode_encode')">Unicode编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('unicode_decode')">Unicode解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="frontend_convert('json_format', false)">JSON格式化</el-button>
+          </el-button-group>
+
         </el-form-item>
 
         <el-form-item label="变换选项" style="margin-bottom: 10px">
@@ -113,6 +128,7 @@
             <el-button type="primary" size="mini" @click="frontend_convert('reverse_text')">反向文本</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('to_lower_case')">转成小写</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('to_upper_case')">转成大写</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('swap_case')">大小写互换</el-button>
           </el-button-group>
           <div style="margin-top: 5px">
             <el-input-number size="small" :min="2" :max="9" :controls="true"
@@ -227,15 +243,16 @@
           this.lastAction()
         }
       },
-      backend_convert (method) {
+      backend_convert (method, multiple = undefined) {
         let self = this
         this.lastAction = this.backend_convert
+        if (multiple === undefined) {
+          multiple = this.multipleInput
+        }
         let data = {
           'method': method,
           'data': this.text.input,
-          'params': {
-            'multiple_input': this.multipleInput
-          }
+          'multiple_input': multiple
         }
 
         if (method === 'to_digital' || method === 'from_digital') {
