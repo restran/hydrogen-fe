@@ -289,10 +289,9 @@
         return base32.decode(input)
       },
       html_escape (input) {
-        let str = input
-        let s = ''
-        if (str.length === 0) return ''
-        s = str.replace(/&/g, '&gt;')
+        let s = input
+        if (s.length === 0) return ''
+        s = s.replace(/&/g, '&amp;')
         s = s.replace(/</g, '&lt;')
         s = s.replace(/>/g, '&gt;')
         s = s.replace(/ /g, '&nbsp;')
@@ -302,14 +301,17 @@
         return s
       },
       html_un_escape (input) {
-        let str = input
-        let s = ''
-        if (str.length === 0) return ''
-        s = str.replace(/&gt;/g, '&')
+        let s = input
+        if (s.length === 0) return ''
         s = s.replace(/&lt;/g, '<')
         s = s.replace(/&gt;/g, '>')
+        s = s.replace(/&#60;/g, '<')
+        s = s.replace(/&#62;/g, '>')
         s = s.replace(/&nbsp;/g, ' ')
+        s = s.replace(/&amp;/g, '&')
+        s = s.replace(/&#38;/g, '&')
         s = s.replace(/&#39;/g, '\'')
+        s = s.replace(/&#34;/g, '"')
         s = s.replace(/&quot;/g, '"')
         s = s.replace(/<br>/g, '\n')
         return s
@@ -408,7 +410,8 @@
         return input.replace(/\\u([a-fA-F0-9]{4})/g, (match, i) => String.fromCharCode(parseInt(i, 16)))
       },
       string_char_code (input) {
-        return input.split('').map(m => m.charCodeAt()).join(',')
+        let x = input.split('').map(m => m.charCodeAt()).join(',')
+        return `String.fromCharCode(${x})`
       },
       to_lower_case (input) {
         return input.toLowerCase()

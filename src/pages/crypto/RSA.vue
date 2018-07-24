@@ -18,7 +18,7 @@
             <el-form-item label="p">
               <el-input type="textarea" v-model="rsaForm.p"
                         :autosize="{ minRows: 3, maxRows: 30}"
-                        placeholder=""></el-input>
+                        placeholder="支持16进制和10进制，16进制请使用0x开头"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -27,14 +27,23 @@
             <el-form-item label="e">
               <el-input type="textarea" v-model="rsaForm.e"
                         :autosize="{ minRows: 3, maxRows: 30}"
-                        placeholder=""></el-input>
+                        placeholder="65537"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="q">
               <el-input type="textarea" v-model="rsaForm.q"
                         :autosize="{ minRows: 3, maxRows: 30}"
-                        placeholder=""></el-input>
+                        placeholder="支持16进制和10进制，16进制请使用0x开头"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="24">
+            <el-form-item label="d">
+              <el-input type="textarea" v-model="rsaForm.d"
+                        :autosize="{ minRows: 3, maxRows: 30}"
+                        placeholder="支持16进制和10进制，16进制请使用0x开头"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -161,7 +170,8 @@
           n: '',
           e: '65537',
           p: '',
-          q: ''
+          q: '',
+          d: ''
         },
         pemForm: {
           key_content: '',
@@ -212,16 +222,32 @@
           'e': self.rsaForm.e,
           'p': self.rsaForm.p,
           'q': self.rsaForm.q,
+          'd': self.rsaForm.d,
           'passphrase': self.pemForm.passphrase,
           'key_content': self.pemForm.key_content
         }
         this.$http.post(url, postData).then(function (r) {
-          self.pemForm.key_content = r['data']['key_content']
-          self.pemForm.is_private = r['data']['is_private']
-          self.rsaForm.n = r['data']['n']
-          self.rsaForm.e = r['data']['e']
-          self.rsaForm.p = r['data']['p']
-          self.rsaForm.q = r['data']['q']
+          if (r['data']['key_content'] !== undefined) {
+            self.pemForm.key_content = r['data']['key_content']
+          }
+          if (r['data']['is_private'] !== undefined) {
+            self.pemForm.is_private = r['data']['is_private']
+          }
+          if (r['data']['n'] !== undefined) {
+            self.rsaForm.n = r['data']['n']
+          }
+          if (r['data']['e'] !== undefined) {
+            self.rsaForm.e = r['data']['e']
+          }
+          if (r['data']['p'] !== undefined) {
+            self.rsaForm.p = r['data']['p']
+          }
+          if (r['data']['q'] !== undefined) {
+            self.rsaForm.q = r['data']['q']
+          }
+          if (r['data']['d'] !== undefined) {
+            self.rsaForm.d = r['data']['d']
+          }
         }).catch(function (r) {
           self.$eventHub.$emit('show-error-msg', r['msg'])
         })
@@ -235,6 +261,7 @@
           'e': self.rsaForm.e,
           'p': self.rsaForm.p,
           'q': self.rsaForm.q,
+          'd': self.rsaForm.d,
           'plain_encoding': self.encryptForm.plain_encoding,
           'cipher_encoding': self.encryptForm.cipher_encoding,
           'padding': self.encryptForm.padding,
