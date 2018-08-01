@@ -50,15 +50,7 @@
             <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('quoted_printable')">Quoted-printable编码
               </el-button>
-              <el-button type="" size="mini" @click="backend_convert('char_count')">字符频率统计
-              </el-button>
             </div>
-
-            <div class="button-group">
-              <el-button type="" size="mini" @click="backend_convert('remove_duplicated')">按行去重
-              </el-button>
-            </div>
-
           </el-form-item>
         </el-form>
 

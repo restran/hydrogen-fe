@@ -14,6 +14,7 @@ import AES from '@/pages/crypto/AES'
 import Hashed from '@/pages/misc/Hashed'
 import Develop from '@/pages/misc/Develop'
 import Reverse from '@/pages/misc/Reverse'
+import Utility from '@/pages/misc/Utility'
 
 import Repeater from '@/pages/http/Repeater'
 import Proxy from '@/pages/http/Proxy'
@@ -45,6 +46,9 @@ export default new Router({
     },
     {
       path: '/misc/develop', component: Develop
+    },
+    {
+      path: '/misc/utility', component: Utility
     },
     {
       path: '/misc/reverse', component: Reverse

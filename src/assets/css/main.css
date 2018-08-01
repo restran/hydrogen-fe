@@ -76,7 +76,7 @@ body {
   clear: inherit !important;
 }
 .card-container {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
 }
 .el-button--mini {

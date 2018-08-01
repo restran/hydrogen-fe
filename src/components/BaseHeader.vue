@@ -129,6 +129,10 @@
                 path: 'hashed'
               },
               {
+                name: '辅助工具',
+                path: 'utility'
+              },
+              {
                 name: '逆向工具',
                 path: 'reverse'
               }
