@@ -19,6 +19,14 @@
               </el-button>
             </div>
 
+            <div>
+              <div style="width: 115px;display: inline-block; color: #606266">换行分割多条输入</div>
+              <el-switch
+                v-model="multipleInput"
+                active-color="#13ce66">
+              </el-switch>
+            </div>
+
           </el-form-item>
         </el-form>
 
@@ -49,7 +57,8 @@
         text: {
           input: '',
           output: ''
-        }
+        },
+        multipleInput: false
       }
     },
     mounted () {
@@ -66,12 +75,15 @@
       output (value) {
         this.text.output = value
       },
-      backend_convert (method) {
+      backend_convert (method, multiple = undefined) {
         let self = this
-        this.lastAction = this.backend_convert
+        if (multiple === undefined) {
+          multiple = this.multipleInput
+        }
         let data = {
           'method': method,
-          'data': this.text.input
+          'data': this.text.input,
+          'multiple_input': multiple
         }
 
         this.$http.post('/api/misc/utility/', data)
