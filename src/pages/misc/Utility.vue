@@ -18,7 +18,10 @@
               <el-button type="" size="mini" @click="backend_convert('int2ip')">10进制数转IP
               </el-button>
             </div>
-
+            <div class="button-group">
+              <el-button type="" size="mini" @click="backend_convert('caidao_decode')">菜刀流量解码
+              </el-button>
+            </div>
             <div>
               <div style="width: 115px;display: inline-block; color: #606266">换行分割多条输入</div>
               <el-switch

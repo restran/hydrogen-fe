@@ -31,7 +31,10 @@
               <div class="text item" v-for="item in result">
                 <el-row slot="header" type="flex" class="clearfix" justify="center" :gutter="20">
                   <el-col :span="4">{{ item.label }}</el-col>
-                  <el-col :span="20"><code>{{ item.value }}</code></el-col>
+                  <el-col :span="20">
+                    <code v-clipboard:copy="item.value"
+                          v-clipboard:success="onCopy">{{ item.value }}</code>
+                  </el-col>
                 </el-row>
               </div>
             </el-card>
@@ -141,6 +144,9 @@
           }).catch(function (r) {
           self.$eventHub.$emit('show-error-msg', r['msg'])
         })
+      },
+      onCopy (e) {
+        this.$eventHub.$emit('show-success-msg', '已复制')
       }
     },
     watch: {}

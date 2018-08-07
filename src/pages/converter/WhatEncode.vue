@@ -26,8 +26,10 @@
 
       <div class="text item" v-for="item in resultList">
         <div style="margin-bottom: 5px">
-          <p style="color: #1c8de0">{{ item.methods }}</p>
-          <p>{{ item.data }}</p>
+          <p v-clipboard:copy="item.methods"
+             v-clipboard:success="onCopy" style="color: #1c8de0">{{ item.methods }}</p>
+          <p v-clipboard:copy="item.data"
+             v-clipboard:success="onCopy">{{ item.data }}</p>
         </div>
       </div>
     </el-card>
@@ -91,6 +93,9 @@
       },
       onSubmit () {
         return this.backendRequest()
+      },
+      onCopy (e) {
+        this.$eventHub.$emit('show-success-msg', '已复制')
       }
     },
     watch: {}

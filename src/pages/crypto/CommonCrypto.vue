@@ -50,6 +50,8 @@
             <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('quoted_printable')">Quoted-printable编码
               </el-button>
+              <el-button type="" size="mini" @click="backend_convert('pigpen_cipher')">猪圈密码
+              </el-button>
             </div>
           </el-form-item>
         </el-form>
