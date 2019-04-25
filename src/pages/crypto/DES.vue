@@ -1,14 +1,10 @@
 <template>
   <div class="card-container">
     <el-card class="box-card">
-      <!--<div slot="header" class="clearfix">-->
-        <!--<span>AES工具</span>-->
-      <!--</div>-->
-
       <el-form :model="form" size="medium" label-position="top">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="Key (密钥长度128/196/256位，16/24/32字节)">
+            <el-form-item label="Key (密钥长度64位/8字节，3DES密钥为16字节/24字节)">
               <el-input placeholder="" v-model="form.key" class="input-with-select">
                 <el-select v-model="form.key_encoding" slot="prepend" style="width: 95px;">
                   <el-option label="Hex" value="Hex"></el-option>
@@ -20,7 +16,7 @@
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="IV (128位16字节，与分组大小相同)">
+            <el-form-item label="IV (64位8字节，与分组大小相同)">
               <el-input placeholder="" v-model="form.iv" class="input-with-select">
                 <el-select v-model="form.iv_encoding" slot="prepend" style="width: 95px;">
                   <el-option label="Hex" value="Hex"></el-option>
@@ -84,10 +80,16 @@
         <el-row type="flex" class="row-bg" justify="center">
           <el-col :span="24" style="text-align: center">
             <el-button icon="el-icon-arrow-left" type="primary" size="medium"
-                       @click="encryptProcess('decrypt')">解密
+                       @click="encryptProcess('decrypt', false)">DES解密
             </el-button>
             <el-button icon="el-icon-arrow-right" type="primary" size="medium"
-                       @click="encryptProcess('encrypt')">加密
+                       @click="encryptProcess('encrypt', false)">DES加密
+            </el-button>
+                        <el-button icon="el-icon-arrow-left" type="primary" size="medium"
+                       @click="encryptProcess('decrypt', true)">3DES解密
+            </el-button>
+            <el-button icon="el-icon-arrow-right" type="primary" size="medium"
+                       @click="encryptProcess('encrypt', true)">3DES加密
             </el-button>
           </el-col>
         </el-row>
@@ -111,7 +113,7 @@
       </el-form>
 
       <div style="font-size: 14px; color: #606266">
-        AES 分组大小是128位16字节
+        DES 分组大小是64位8字节。<br>3DES 加密时，密钥的前8个字节不能等于后8个字节，否则就退化为 DES，导致无法用该工具加密。
       </div>
     </el-card>
   </div>
@@ -147,11 +149,12 @@
     },
     computed: {},
     methods: {
-      encryptProcess (actionType) {
+      encryptProcess (actionType, isTripleDES=false) {
         let self = this
-        let url = '/api/crypto/aes-encrypt-decrypt/'
+        let url = '/api/crypto/des-encrypt-decrypt/'
         let postData = this.$utils.copy(this.form)
         postData['action'] = actionType
+        postData['is_triple_des'] = isTripleDES
 
         this.$http.post(url, postData).then(function (r) {
           self.form.plain = r['data'].plain

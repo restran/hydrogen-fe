@@ -152,6 +152,21 @@
             PKCS1_OAEP 是最安全的填充方法，每次加密后的结果都不一样
           </div>
         </el-tab-pane>
+
+        <el-tab-pane label="其它">
+          <el-form :label-width="'100'" label-position="top" size="medium">
+            <el-row type="flex" class="row-bg" justify="center">
+              <el-col :span="24" style="text-align: center; margin-bottom: 10px">
+                <el-button icon="el-icon-arrow-left" size="medium" type="primary"
+                           @click="calcD()">计算D
+                </el-button>
+              </el-col>
+            </el-row>
+                      <div style="font-size: 14px; color: #606266">
+            已知p、q计算d
+          </div>
+          </el-form>
+        </el-tab-pane>
       </el-tabs>
     </el-card>
   </div>
@@ -271,6 +286,20 @@
         this.$http.post(url, postData).then(function (r) {
           self.encryptForm.plain = r['data'].plain
           self.encryptForm.cipher = r['data'].cipher
+        }).catch(function (r) {
+          self.$eventHub.$emit('show-error-msg', r['msg'])
+        })
+      },
+      calcD(){
+        let self = this
+        let url = '/api/crypto/rsa-calc-d/'
+        let postData = {
+          'e': self.rsaForm.e,
+          'p': self.rsaForm.p,
+          'q': self.rsaForm.q,
+        }
+        this.$http.post(url, postData).then(function (r) {
+          self.rsaForm.d = r['data']
         }).catch(function (r) {
           self.$eventHub.$emit('show-error-msg', r['msg'])
         })

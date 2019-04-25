@@ -5,11 +5,13 @@ import Converter from '@/pages/converter/CommonConverter'
 import DigitConverter from '@/pages/converter/DigitConverter'
 import WhatEncode from '@/pages/converter/WhatEncode'
 import FileConverter from '@/pages/converter/FileConverter'
+import ParseDsStore from '@/pages/converter/ParseDsStore'
 
 import MorseCode from '@/pages/crypto/MorseCode'
 import CommonCrypto from '@/pages/crypto/CommonCrypto'
 import RSA from '@/pages/crypto/RSA'
 import AES from '@/pages/crypto/AES'
+import DES from '@/pages/crypto/DES'
 
 import Hashed from '@/pages/misc/Hashed'
 import Develop from '@/pages/misc/Develop'
@@ -34,6 +36,9 @@ export default new Router({
     },
     {
       path: '/converter/file-converter', component: FileConverter
+    },
+    {
+      path: '/converter/parse-ds-store', component: ParseDsStore
     },
     {
       path: '/http/repeater', component: Repeater
@@ -64,6 +69,9 @@ export default new Router({
     },
     {
       path: '/crypto/aes', component: AES
+    },
+    {
+      path: '/crypto/des', component: DES
     },
     {
       path: '*', redirect: '/converter/common'

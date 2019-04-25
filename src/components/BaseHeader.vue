@@ -74,6 +74,10 @@
                 name: '文件转换',
                 path: 'file-converter'
               },
+                            {
+                name: '解析DS_Store',
+                path: 'parse-ds-store'
+              },
               {
                 name: 'WhatEncode',
                 path: 'what-encode'
@@ -95,6 +99,10 @@
               {
                 name: 'AES工具',
                 path: 'aes'
+              },
+              {
+                name: 'DES工具',
+                path: 'des'
               },
               {
                 name: 'RSA工具',

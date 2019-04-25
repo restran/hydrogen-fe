@@ -34,7 +34,7 @@
 
           <el-button-group>
             <el-button type="primary" size="mini" @click="frontend_convert('utf7_encode')">UTF7编码</el-button>
-            <el-button type="primary" size="mini" @click="frontend_convert('utf7_encode')">UTF7全编码</el-button>
+            <el-button type="primary" size="mini" @click="frontend_convert('utf7_all_encode')">UTF7全编码</el-button>
             <el-button type="primary" size="mini" @click="frontend_convert('utf7_decode')">UTF7解码</el-button>
           </el-button-group>
 
@@ -50,12 +50,17 @@
           </el-button-group>
 
           <el-button-group>
-            <el-button type="primary" size="mini" @click="frontend_convert('b64encode')">B64编码</el-button>
-            <el-button type="primary" size="mini" @click="frontend_convert('b64decode')">B64解码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base64')">B64编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base64')">B64解码</el-button>
           </el-button-group>
           <el-button-group>
-            <el-button type="primary" size="mini" @click="frontend_convert('b32encode')">B32编码</el-button>
-            <el-button type="primary" size="mini" @click="frontend_convert('b32decode')">B32解码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base32')">B32编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base32')">B32解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base58')">B58编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base58')">B58解码</el-button>
           </el-button-group>
 
           <el-button-group>
@@ -259,13 +264,11 @@
           data['params'] = [this.digitalNum]
         }
 
-        this.$http.post('/api/converter/convert-data/', data)
-          .then(function (r) {
-            self.output(r['data'])
-          })
-          .catch(function (r) {
-            self.$eventHub.$emit('show-error-msg', r['msg'])
-          })
+        this.$http.post('/api/converter/convert-data/', data).then(function (r) {
+          self.output(r['data'])
+        }).catch(function (r) {
+          self.$eventHub.$emit('show-error-msg', r['msg'])
+        })
       },
       b64encode (input) {
         return base64.stringify(utf8.parse(input))
@@ -375,11 +378,11 @@
         return input.replace(/&#(\d+);?/g, (match, i) => String.fromCharCode(parseInt(i)))
       },
       html_special_chars (input) {
-        return input.replace(/&/g, '&amp;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
+        return input.replace(/&/g, '&amp;').
+          replace(/"/g, '&quot;').
+          replace(/'/g, '&#039;').
+          replace(/</g, '&lt;').
+          replace(/>/g, '&gt;')
       },
       html16_encode (input) {
         return input.split('').map(m => '&#x' + m.charCodeAt().toString(16) + ';').join('')
@@ -477,6 +480,7 @@
   .text-area
     .el-form-item:after, .el-form-item:before, .el-form-item__content:after, .el-form-item__content:before
       display none !important
+
     .el-form-item:after
       clear inherit !important
 </style>
