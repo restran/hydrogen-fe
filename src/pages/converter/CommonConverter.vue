@@ -126,6 +126,10 @@
             <el-button type="primary" size="mini" @click="frontend_convert('json_format', false)">JSON格式化</el-button>
           </el-button-group>
 
+          <el-button-group>
+            <el-button type="success" size="mini" @click="find_flag()">Find Flag</el-button>
+          </el-button-group>
+
         </el-form-item>
 
         <el-form-item label="变换选项" style="margin-bottom: 10px">
@@ -457,6 +461,22 @@
         }
 
         this.output(result)
+      },
+      find_flag () {
+        let self = this
+        let data = {
+          'data': [this.text.input, this.text.output]
+        }
+
+        if (this.text.input === '' && this.text.output === '') {
+          return
+        }
+
+        this.$http.post('/api/crypto/find-flag-from-string/', data).then(function (r) {
+          self.output(r['data'])
+        }).catch(function (r) {
+          self.$eventHub.$emit('show-error-msg', r['msg'])
+        })
       }
     },
     watch: {}

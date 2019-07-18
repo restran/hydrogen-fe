@@ -53,6 +53,12 @@
               <el-button type="" size="mini" @click="backend_convert('pigpen_cipher')">猪圈密码
               </el-button>
             </div>
+
+            <div class="button-group">
+              <el-button type="primary" size="mini" @click="fuzzing()">Fuzzing</el-button>
+              <el-button type="primary" size="mini" @click="find_flag()">Find Flag</el-button>
+            </div>
+
           </el-form-item>
         </el-form>
 
@@ -112,13 +118,43 @@
           data['params'] = [this.digitalNum]
         }
 
-        this.$http.post('/api/crypto/decode-data/', data)
-          .then(function (r) {
-            self.output(r['data'])
-          })
-          .catch(function (r) {
-            self.$eventHub.$emit('show-error-msg', r['msg'])
-          })
+        this.$http.post('/api/crypto/decode-data/', data).then(function (r) {
+          self.output(r['data'])
+        }).catch(function (r) {
+          self.$eventHub.$emit('show-error-msg', r['msg'])
+        })
+      },
+      fuzzing () {
+        let self = this
+        let data = {
+          'data': this.text.input
+        }
+
+        if (data.data === '') {
+          return
+        }
+
+        this.$http.post('/api/crypto/fuzzing/', data).then(function (r) {
+          self.output(r['data'])
+        }).catch(function (r) {
+          self.$eventHub.$emit('show-error-msg', r['msg'])
+        })
+      },
+      find_flag () {
+        let self = this
+        let data = {
+          'data': [this.text.input, this.text.output]
+        }
+
+        if (this.text.input === '' && this.text.output === '') {
+          return
+        }
+
+        this.$http.post('/api/crypto/find-flag-from-string/', data).then(function (r) {
+          self.output(r['data'])
+        }).catch(function (r) {
+          self.$eventHub.$emit('show-error-msg', r['msg'])
+        })
       },
       handleClick (tab, event) {
         console.log(tab, event)
@@ -144,12 +180,14 @@
   .crypto.button-area
     .el-form-item__content
       line-height 28px !important
+
     .el-button + .el-button
       margin-left 5px
 
   .text-area
     .el-form-item:after, .el-form-item:before, .el-form-item__content:after, .el-form-item__content:before
       display none !important
+
     .el-form-item:after
       clear inherit !important
 </style>
