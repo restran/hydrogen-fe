@@ -84,7 +84,7 @@ function defaultOption (option) {
 function unicodeHexMorse (ch) {
   var r = []
   for (var i = 0; i < ch.length; i++)
-    r[i] = ('00' + ch.charCodeAt(i).toString(16)).slice(-4);
+    r[i] = ('00' + ch.charCodeAt(i).toString(16)).slice(-4)
   r = r.join('') // unicode 值
   r = parseInt(r, 16).toString(2) // 转二进制
   return r
@@ -99,10 +99,10 @@ function unicodeHexMorse (ch) {
  *
  * Usage
  * var option = {
-   *  space: ' ',
-   *  long: '-',
-   *  short: '*'
-   * };
+ *  space: ' ',
+ *  long: '-',
+ *  short: '*'
+ * };
  * xmorse.encode('I love you.', option);
  * Will get return with `** *-** --- ***- * -*-- --- **- *-*-*-`.
  *
@@ -128,6 +128,11 @@ function morseHexUnicode (mor) {
   return unescape('%u' + mor.toString(16)) // 转 16 进制 -> unicode -> unicode 转字符串
 }
 
+String.prototype.replaceAll = function (search, replacement) {
+  var target = this
+  return target.split(search).join(replacement)
+}
+
 /**
  * decode: encode string to morse code.
  * - morse: morse code need to be decode.
@@ -137,27 +142,31 @@ function morseHexUnicode (mor) {
  *
  * Usage
  * var option = {
-   *  space: ' ',
-   *  long: '-',
-   *  short: '*'
-   * };
+ *  space: ' ',
+ *  long: '-',
+ *  short: '*'
+ * };
  * xmorse.decode('** *-** --- ***- * -*-- --- **- *-*-*-', option);
  * Will get return with `ILOVEYOU`.
  *
  **/
 function decode (morse, option) {
   option = defaultOption(option)
+  console.log(option)
   var msg = []
   morse = morse.split(option[0]) // 分割为数组
   var mor, r
-  for (var i = 0, l = morse.length; i < l; i++) {
-    mor = morse[i].replace(/\s+/g, '') // 去除空格
-      .replace(new RegExp('\\' + option[1], 'g'), '0')
-      .replace(new RegExp('\\' + option[2], 'g'), '1') // 转二进制;
-    r = standardReverse[mor]
-    if (!r) r = morseHexUnicode(mor) // 找不到，说明是非标准字符的 morse，使用 unicode 解析方式。
-    msg.push(r)
-  }
+  var regSpecialCharList = ['-', '.', '\\', '//', '?', '']
+  if (option[1])
+    for (var i = 0, l = morse.length; i < l; i++) {
+      mor = morse[i].replace(/\s+/g, '') // 去除空格
+        .replaceAll(option[1], '0').
+        replaceAll(option[2], '1') // 转二进制;
+      console.log(mor)
+      r = standardReverse[mor]
+      if (!r) r = morseHexUnicode(mor) // 找不到，说明是非标准字符的 morse，使用 unicode 解析方式。
+      msg.push(r)
+    }
   return msg.join('')
 }
 
