@@ -91,6 +91,7 @@
                 <el-button icon="el-icon-arrow-left" size="medium" type="primary"
                            @click="encryptProcess('decrypt')">解密
                 </el-button>
+
                 <el-button icon="el-icon-arrow-right" size="medium" type="primary"
                            @click="encryptProcess('encrypt')">加密
                 </el-button>
@@ -98,17 +99,27 @@
             </el-row>
 
             <el-row :gutter="20">
-              <el-col :span="8">
+              <el-col :span="6">
+                <el-form-item label="Encrypt Method">
+                  <el-select v-model="encryptForm.encrypt_method" size="medium">
+                    <el-option label="公钥加密" value="public-key-encrypt"></el-option>
+                    <el-option label="私钥加密" value="private-key-encrypt"></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-col>
+
+              <el-col :span="6">
                 <el-form-item label="Padding">
                   <el-select v-model="encryptForm.padding" size="medium">
                     <el-option label="NoPadding" value="NoPadding"></el-option>
                     <el-option label="PKCS1_OAEP" value="PKCS1_OAEP"></el-option>
                     <el-option label="PKCS1_v1_5" value="PKCS1_v1_5"></el-option>
+                    <el-option label="PKCS1_v1_5_Java" value="PKCS1_v1_5_Java"></el-option>
                   </el-select>
                 </el-form-item>
               </el-col>
 
-              <el-col :span="8">
+              <el-col :span="6">
                 <el-form-item label="Plain Format">
                   <el-select v-model="encryptForm.plain_encoding">
                     <el-option label="UTF8" value="UTF8"></el-option>
@@ -119,7 +130,7 @@
                 </el-form-item>
               </el-col>
 
-              <el-col :span="8">
+              <el-col :span="6">
                 <el-form-item label="Cipher Format">
                   <el-select v-model="encryptForm.cipher_encoding">
                     <el-option label="Hex" value="Hex"></el-option>
@@ -149,7 +160,9 @@
           </el-form>
 
           <div style="font-size: 14px; color: #606266">
-            PKCS1_OAEP 是最安全的填充方法，每次加密后的结果都不一样
+            <div>加密方式：公钥加密，私钥解密；私钥加密，公钥解密</div>
+            <div>PKCS1_OAEP 是最安全的填充方法，每次加密后的结果都不一样</div>
+            <div>Java 的 RSA/EBC/PKCS1Padding 对应 PKCS1_v1_5_Java</div>
           </div>
         </el-tab-pane>
 
@@ -162,9 +175,9 @@
                 </el-button>
               </el-col>
             </el-row>
-                      <div style="font-size: 14px; color: #606266">
-            已知p、q计算d
-          </div>
+            <div style="font-size: 14px; color: #606266">
+              已知p、q计算d
+            </div>
           </el-form>
         </el-tab-pane>
       </el-tabs>
@@ -178,9 +191,9 @@
     data () {
       return {
         pemKeyPlaceholder: '-----BEGIN PUBLIC KEY-----\n' +
-        'MDowDQYJKoZIhvcNAQEBBQADKQAwJgIhAMJjauXD2OQ/+5erCQKPGqxsC/bNPXDr\n' +
-        'yigb/+l/vjDdAgEC\n' +
-        '-----END PUBLIC KEY-----\n',
+          'MDowDQYJKoZIhvcNAQEBBQADKQAwJgIhAMJjauXD2OQ/+5erCQKPGqxsC/bNPXDr\n' +
+          'yigb/+l/vjDdAgEC\n' +
+          '-----END PUBLIC KEY-----\n',
         rsaForm: {
           n: '',
           e: '65537',
@@ -194,6 +207,7 @@
           is_private: null
         },
         encryptForm: {
+          encrypt_method: 'public-key-encrypt',
           plain: '',
           cipher: '',
           plain_encoding: 'UTF8',
@@ -281,7 +295,8 @@
           'cipher_encoding': self.encryptForm.cipher_encoding,
           'padding': self.encryptForm.padding,
           'plain': self.encryptForm.plain,
-          'cipher': self.encryptForm.cipher
+          'cipher': self.encryptForm.cipher,
+          'encrypt_method': self.encryptForm.encrypt_method
         }
         this.$http.post(url, postData).then(function (r) {
           self.encryptForm.plain = r['data'].plain
@@ -290,13 +305,13 @@
           self.$eventHub.$emit('show-error-msg', r['msg'])
         })
       },
-      calcD(){
+      calcD () {
         let self = this
         let url = '/api/crypto/rsa-calc-d/'
         let postData = {
           'e': self.rsaForm.e,
           'p': self.rsaForm.p,
-          'q': self.rsaForm.q,
+          'q': self.rsaForm.q
         }
         this.$http.post(url, postData).then(function (r) {
           self.rsaForm.d = r['data']

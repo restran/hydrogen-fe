@@ -63,7 +63,7 @@
         form: {
           input: '',
           output: '',
-          space: '/',
+          space: ' ',
           short: '.',
           long: '-'
         }
