@@ -53,7 +53,9 @@
               <el-button type="" size="mini" @click="backend_convert('pigpen_cipher')">猪圈密码
               </el-button>
             </div>
-
+            <div class="button-group">
+              <el-button type="" size="mini" @click="backend_convert('xor_crack')">XOR爆破</el-button>
+            </div>
             <div class="button-group">
               <el-button type="primary" size="mini" @click="fuzzing()">Fuzzing</el-button>
               <el-button type="primary" size="mini" @click="find_flag()">Find Flag</el-button>
