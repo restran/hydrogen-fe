@@ -31,14 +31,14 @@
               <el-col :span="12">
                 <el-form-item label="请求">
                   <el-input type="textarea" v-model="item.form.request"
-                            :autosize="{ minRows: 6, maxRows: 30}"
+                            :autosize="{ minRows: 12, maxRows: 50}"
                             placeholder=""></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="响应">
                   <el-input type="textarea" v-model="item.form.response"
-                            :autosize="{ minRows: 6, maxRows: 30}"
+                            :autosize="{ minRows: 12, maxRows: 50}"
                             placeholder=""></el-input>
                 </el-form-item>
               </el-col>

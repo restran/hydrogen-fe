@@ -50,17 +50,32 @@
           </el-button-group>
 
           <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base92')">B92编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base92')">B92解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base91')">B91编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base91')">B91解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base85')">B85编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base85')">B85解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base58')">B58编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base58')">B58解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('to_base64')">B64编码</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('from_base64')">B64解码</el-button>
           </el-button-group>
           <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('to_base32')">B32编码</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('from_base32')">B32解码</el-button>
-          </el-button-group>
-
-          <el-button-group>
-            <el-button type="primary" size="mini" @click="backend_convert('to_base58')">B58编码</el-button>
-            <el-button type="primary" size="mini" @click="backend_convert('from_base58')">B58解码</el-button>
           </el-button-group>
 
           <el-button-group>

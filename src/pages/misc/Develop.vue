@@ -71,8 +71,21 @@
 
         <el-form-item label="随机串">
           <el-row type="flex" class="clearfix" :gutter="20">
-            <el-col :span="8">
-              <el-select size="medium" v-model="random.length" filterable placeholder="长度" @change="generateRandom">
+            <el-col :span="14">
+              <el-select size="medium" v-model="random.selectCharset" style="width: 100%"
+                         filterable allow-create
+                         placeholder="字符集" @change="generateRandom">
+                <el-option
+                  v-for="(item, index) in random.charset"
+                  :key="index"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-col>
+            <el-col :span="6">
+              <el-select size="medium" v-model="random.length"
+                         filterable allow-create placeholder="长度" @change="generateRandom">
                 <el-option
                   v-for="item in 100"
                   :key="item"
@@ -81,7 +94,7 @@
                 </el-option>
               </el-select>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="4">
               <el-form-item>
                 <el-button size="medium" @click="generateRandom" type="primary">生成</el-button>
               </el-form-item>
@@ -101,99 +114,141 @@
 </template>
 
 <script>
-  import RandomUserAgent from 'random-useragent'
-  import moment from 'moment'
+import RandomUserAgent from 'random-useragent'
+import moment from 'moment'
 
-  let randomBytes = {
-    upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    lower: 'abcdefghijklmnopqrstuvwxyz',
-    number: '0123456789',
-    symbol: ',.;:][{}`~-_)(*^$@!',
-    danger_symbol: '\'"\\<>?/=+%&#'
-  }
+let randomBytes = {
+  upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  lower: 'abcdefghijklmnopqrstuvwxyz',
+  number: '0123456789',
+  symbol: ',.;:][{}`~-_)(*^$@!',
+  danger_symbol: '\'"\\<>?/=+%&#'
+}
 
-  export default {
-    created () {
-      this.clock()
-      this.t = setInterval(this.clock, 1000)
+export default {
+  created () {
+    this.clock()
+    this.t = setInterval(this.clock, 1000)
+  },
+  data () {
+    return {
+      t: null,
+      time: {
+        now: '',
+        action: '暂停'
+      },
+      transformation: {
+        input: '',
+        output: ''
+      },
+      userAgent: navigator.userAgent,
+      random: {
+        value: '',
+        length: 12,
+        range: [0, 100],
+        number: 0,
+        selectCharset: randomBytes.number + randomBytes.lower + randomBytes.upper,
+        charset: [
+          {
+            'label': randomBytes.number,
+            'value': randomBytes.number
+          },
+          {
+            'label': randomBytes.number + randomBytes.lower,
+            'value': randomBytes.number + randomBytes.lower
+          },
+          {
+            'label': randomBytes.number + randomBytes.upper,
+            'value': randomBytes.number + randomBytes.upper
+          },
+          {
+            'label': randomBytes.number + randomBytes.lower + randomBytes.upper,
+            'value': randomBytes.number + randomBytes.lower + randomBytes.upper
+          },
+          {
+            'label': randomBytes.number + randomBytes.lower + randomBytes.upper + randomBytes.symbol,
+            'value': randomBytes.number + randomBytes.lower + randomBytes.upper + randomBytes.symbol
+          },
+          {
+            'label': randomBytes.number + randomBytes.lower + randomBytes.upper + randomBytes.symbol +
+              randomBytes.danger_symbol,
+            'value': randomBytes.number + randomBytes.lower + randomBytes.upper + randomBytes.symbol +
+              randomBytes.danger_symbol
+          },
+          {
+            'label': randomBytes.lower,
+            'value': randomBytes.lower
+          },
+          {
+            'label': randomBytes.upper,
+            'value': randomBytes.upper
+          },
+          {
+            'label': randomBytes.lower + randomBytes.upper,
+            'value': randomBytes.lower + randomBytes.upper
+          }
+        ]
+      }
+    }
+  },
+  computed: {},
+  methods: {
+    copyData () {
+      return this.time.now
     },
-    data () {
-      return {
-        t: null,
-        time: {
-          now: '',
-          action: '暂停'
-        },
-        transformation: {
-          input: '',
-          output: ''
-        },
-        userAgent: navigator.userAgent,
-        random: {
-          value: '',
-          length: 12,
-          range: [0, 100],
-          number: 0
-        }
+    pause () {
+      if (this.time.action === '开始') {
+        this.clock()
+        this.t = setInterval(this.clock, 1000)
+        this.time.action = '暂停'
+      } else {
+        clearInterval(this.t)
+        this.time.action = '开始'
       }
     },
-    computed: {},
-    methods: {
-      copyData () {
-        return this.time.now
-      },
-      pause () {
-        if (this.time.action === '开始') {
-          this.clock()
-          this.t = setInterval(this.clock, 1000)
-          this.time.action = '暂停'
-        } else {
-          clearInterval(this.t)
-          this.time.action = '开始'
-        }
-      },
-      clock () {
-        this.time.now = moment().unix()
-      },
-      toTimestamp () {
-        this.transformation.output = moment(this.transformation.input).unix()
-      },
-      toDate () {
-        this.transformation.output = moment(parseFloat(`${this.transformation.input}000`)).format()
-      },
-      generateUA () {
-        this.userAgent = RandomUserAgent.getRandom()
-      },
-      generateRandom () {
-        console.log('generateRandom')
+    clock () {
+      this.time.now = moment().unix()
+    },
+    toTimestamp () {
+      this.transformation.output = moment(this.transformation.input).unix()
+    },
+    toDate () {
+      this.transformation.output = moment(parseFloat(`${this.transformation.input}000`)).format()
+    },
+    generateUA () {
+      this.userAgent = RandomUserAgent.getRandom()
+    },
+    generateRandom () {
+      console.log('generateRandom')
 //                Math.seedrandom()
-        let range = ''
-        let result = []
+      let range = ''
+      let result = []
 //                for (let sort of this.random.length) {
 //                    range += randomBytes[sort]
 //                }
-        range = randomBytes['upper'] + randomBytes['lower'] + randomBytes['number']
-        for (let i = 0; i < this.random.length; i++) {
-          result.push(range[Math.round(Math.random() * range.length)])
-        }
-        this.random.value = result.join('')
-      },
-      generateRandomNumber () {
-//                Math.seedrandom()
-        let min = Math.min(parseInt(this.random.range[1]), parseInt(this.random.range[0]))
-        let max = Math.max(parseInt(this.random.range[1]), parseInt(this.random.range[0]))
-        this.random.number = Math.round(Math.random() * (max - min)) + min
+//       range = randomBytes['upper'] + randomBytes['lower'] + randomBytes['number']
+      range = this.random.selectCharset
+      for (let i = 0; i < this.random.length; i++) {
+        result.push(range[Math.round(Math.random() * range.length)])
       }
+      this.random.value = result.join('')
+    },
+    generateRandomNumber () {
+//                Math.seedrandom()
+      let min = Math.min(parseInt(this.random.range[1]), parseInt(this.random.range[0]))
+      let max = Math.max(parseInt(this.random.range[1]), parseInt(this.random.range[0]))
+      this.random.number = Math.round(Math.random() * (max - min)) + min
     }
   }
+}
 </script>
 
 <style scoped>
-  .row-bg {
-    margin-bottom: 30px;
-  }
+.row-bg {
+  margin-bottom: 30px;
+}
 
-  .el-form-item {
-    margin-bottom: 10px;
-  }
+.el-form-item {
+  margin-bottom: 10px;
+}
 </style>
