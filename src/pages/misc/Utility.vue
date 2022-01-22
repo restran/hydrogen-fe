@@ -13,6 +13,13 @@
             </div>
 
             <div class="button-group">
+              <el-button type="" size="mini" @click="backend_convert('sort_asc')">正向排序
+              </el-button>
+              <el-button type="" size="mini" @click="backend_convert('sort_desc')">反向排序
+              </el-button>
+            </div>
+
+            <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('ip2int')">IP转10进制数
               </el-button>
               <el-button type="" size="mini" @click="backend_convert('int2ip')">10进制数转IP
