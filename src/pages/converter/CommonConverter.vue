@@ -50,6 +50,11 @@
           </el-button-group>
 
           <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base100')">B100编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base100')">B100解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('to_base92')">B92编码</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('from_base92')">B92解码</el-button>
           </el-button-group>
@@ -67,6 +72,26 @@
           <el-button-group>
             <el-button type="primary" size="mini" @click="backend_convert('to_base58')">B58编码</el-button>
             <el-button type="primary" size="mini" @click="backend_convert('from_base58')">B58解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_ascii85')">Ascii85编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_ascii85')">Ascii85解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base62')">B62编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base62')">B62解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base36')">B36编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base36')">B36解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_any_base32')">AnyB32编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_any_base32')">AnyB32解码</el-button>
           </el-button-group>
 
           <el-button-group>
