@@ -6,10 +6,13 @@
           <el-form-item label="解密方式" style="margin-bottom: 10px">
             <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('caesar')">凯撒密码</el-button>
-              <el-button type="" size="mini" @click="backend_convert('rot13')">ROT13</el-button>
+
               <el-button type="" size="mini" @click="backend_convert('atbash_cipher')">埃特巴什码</el-button>
             </div>
-
+            <div class="button-group">
+              <el-button type="" size="mini" @click="backend_convert('rot13')">ROT13</el-button>
+              <el-button type="" size="mini" @click="backend_convert('rot47')">ROT47</el-button>
+            </div>
             <div class="button-group">
               <el-button type="" size="mini" @click="backend_convert('caesar_printable')">可见字符凯撒</el-button>
               <el-button type="" size="mini" @click="backend_convert('caesar_odd_even')">奇偶不同凯撒</el-button>
@@ -80,116 +83,116 @@
 </template>
 
 <script>
-  import base64 from 'crypto-js/enc-base64'
-  import utf8 from 'crypto-js/enc-utf8'
-  import latin1 from 'crypto-js/enc-latin1'
+import base64 from 'crypto-js/enc-base64'
+import utf8 from 'crypto-js/enc-utf8'
+import latin1 from 'crypto-js/enc-latin1'
 
-  export default {
-    components: {},
-    data () {
-      return {
-        text: {
-          input: '',
-          output: ''
-        }
+export default {
+  components: {},
+  data () {
+    return {
+      text: {
+        input: '',
+        output: ''
       }
-    },
-    mounted () {
-      let self = this
-      this.$nextTick(function () {
+    }
+  },
+  mounted () {
+    let self = this
+    this.$nextTick(function () {
 
+    })
+  },
+  created () {
+
+  },
+  computed: {},
+  methods: {
+    output (value) {
+      this.text.output = value
+    },
+    backend_convert (method) {
+      let self = this
+      this.lastAction = this.backend_convert
+      let data = {
+        'method': method,
+        'data': this.text.input
+      }
+
+      if (method === 'to_digital' || method === 'from_digital') {
+        data['params'] = [this.digitalNum]
+      }
+
+      this.$http.post('/api/crypto/decode-data/', data).then(function (r) {
+        self.output(r['data'])
+      }).catch(function (r) {
+        self.$eventHub.$emit('show-error-msg', r['msg'])
       })
     },
-    created () {
-
-    },
-    computed: {},
-    methods: {
-      output (value) {
-        this.text.output = value
-      },
-      backend_convert (method) {
-        let self = this
-        this.lastAction = this.backend_convert
-        let data = {
-          'method': method,
-          'data': this.text.input
-        }
-
-        if (method === 'to_digital' || method === 'from_digital') {
-          data['params'] = [this.digitalNum]
-        }
-
-        this.$http.post('/api/crypto/decode-data/', data).then(function (r) {
-          self.output(r['data'])
-        }).catch(function (r) {
-          self.$eventHub.$emit('show-error-msg', r['msg'])
-        })
-      },
-      fuzzing () {
-        let self = this
-        let data = {
-          'data': this.text.input
-        }
-
-        if (data.data === '') {
-          return
-        }
-
-        this.$http.post('/api/crypto/fuzzing/', data).then(function (r) {
-          self.output(r['data'])
-        }).catch(function (r) {
-          self.$eventHub.$emit('show-error-msg', r['msg'])
-        })
-      },
-      find_flag () {
-        let self = this
-        let data = {
-          'data': [this.text.input, this.text.output]
-        }
-
-        if (this.text.input === '' && this.text.output === '') {
-          return
-        }
-
-        this.$http.post('/api/crypto/find-flag-from-string/', data).then(function (r) {
-          self.output(r['data'])
-        }).catch(function (r) {
-          self.$eventHub.$emit('show-error-msg', r['msg'])
-        })
-      },
-      handleClick (tab, event) {
-        console.log(tab, event)
+    fuzzing () {
+      let self = this
+      let data = {
+        'data': this.text.input
       }
+
+      if (data.data === '') {
+        return
+      }
+
+      this.$http.post('/api/crypto/fuzzing/', data).then(function (r) {
+        self.output(r['data'])
+      }).catch(function (r) {
+        self.$eventHub.$emit('show-error-msg', r['msg'])
+      })
     },
-    watch: {}
-  }
+    find_flag () {
+      let self = this
+      let data = {
+        'data': [this.text.input, this.text.output]
+      }
+
+      if (this.text.input === '' && this.text.output === '') {
+        return
+      }
+
+      this.$http.post('/api/crypto/find-flag-from-string/', data).then(function (r) {
+        self.output(r['data'])
+      }).catch(function (r) {
+        self.$eventHub.$emit('show-error-msg', r['msg'])
+      })
+    },
+    handleClick (tab, event) {
+      console.log(tab, event)
+    }
+  },
+  watch: {}
+}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .text-area
-    margin-left 250px
+.text-area
+  margin-left 250px
 
-  .button-area
-    max-width 235px
+.button-area
+  max-width 235px
 
-  .button-group
-    padding 3px 0
+.button-group
+  padding 3px 0
 
 </style>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  .crypto.button-area
-    .el-form-item__content
-      line-height 28px !important
+.crypto.button-area
+  .el-form-item__content
+    line-height 28px !important
 
-    .el-button + .el-button
-      margin-left 5px
+  .el-button + .el-button
+    margin-left 5px
 
-  .text-area
-    .el-form-item:after, .el-form-item:before, .el-form-item__content:after, .el-form-item__content:before
-      display none !important
+.text-area
+  .el-form-item:after, .el-form-item:before, .el-form-item__content:after, .el-form-item__content:before
+    display none !important
 
-    .el-form-item:after
-      clear inherit !important
+  .el-form-item:after
+    clear inherit !important
 </style>

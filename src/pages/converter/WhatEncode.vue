@@ -48,7 +48,7 @@
       return {
         form: {
           input: '',
-          maxDepth: 5
+          maxDepth: 3
         },
         resultList: [],
         schemeList: []

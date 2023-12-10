@@ -75,6 +75,16 @@
           </el-button-group>
 
           <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base58_flickr')">B58-Flickr编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base58_flickr')">B58-Flickr解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
+            <el-button type="primary" size="mini" @click="backend_convert('to_base58_ripple')">B58-Ripple编码</el-button>
+            <el-button type="primary" size="mini" @click="backend_convert('from_base58_ripple')">B58-Ripple解码</el-button>
+          </el-button-group>
+
+          <el-button-group>
             <el-tooltip class="item" effect="dark" content="Ascii85编码" placement="top-start">
               <el-button type="primary" size="mini" @click="backend_convert('to_ascii85')">A85编码</el-button>
             </el-tooltip>
